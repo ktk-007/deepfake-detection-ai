@@ -18,12 +18,12 @@ import cv2
 import numpy as np
 from tqdm import tqdm
 
+from .batch import EVAL_PARTS
 from .dfdc_zip import build_groups, load_metadata, read_frames
 from .faces import crops_for
 from .index import IndexWriter, done_groups, read_index, video_dir
 from .score import THRESHOLD, local_noise_score
 
-VAL_PARTS = (48, 49)
 KB_PER_FRAME_Q95 = 12.9  # 147 KB / 16 frames at q90, about +40% at q95
 
 
@@ -41,7 +41,7 @@ class ExtractConfig:
 
 
 def config_for_part(part: int) -> ExtractConfig:
-    return ExtractConfig(frames=32 if part in VAL_PARTS else 16)
+    return ExtractConfig(frames=32 if part in EVAL_PARTS else 16)
 
 
 def planned_videos(fakes_of: dict, max_fakes: int) -> int:

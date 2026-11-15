@@ -191,9 +191,34 @@ def test_gates_detect_missing_real_and_missing_jpeg(synthetic_zip, tmp_path):
 # ---------------------------------------------------------------- batch bookkeeping
 def test_next_message_follows_batch_table():
     assert "part_00" in batch.next_message(set())
-    assert "part_48" in batch.next_message({0, 1})
-    assert "part_02" in batch.next_message({0, 1, 48, 49})
-    assert "all planned" in batch.next_message({p for b in batch.BATCHES for p in b})
+    msg = batch.next_message({0, 1})
+    assert "part_02" in msg and "part_08" in msg
+    msg = batch.next_message({0, 1, 2})            # one zip at a time: names only the missing part
+    assert "part_08" in msg and "part_02" not in msg
+    assert "part_03" in batch.next_message({0, 1, 2, 8})
+    assert "DFDC done" in batch.next_message(set(range(10)))
+
+
+def test_eval_parts_get_32_frames():
+    from unmask.data.extract import config_for_part
+    assert config_for_part(8).frames == 32 and config_for_part(9).frames == 32
+    assert all(config_for_part(p).frames == 16 for p in range(8))
+
+
+def test_test_part_never_in_train_or_val():
+    """Part 08 is validation only, part 09 is test only (PLAN 4.3)."""
+    done = set(range(10))
+    assert batch.train_parts(done) == list(range(8))
+    assert batch.val_parts(done) == [8]
+    assert batch.val_parts(set(range(8))) == []
+    assert 8 not in batch.TRAIN_PARTS and 9 not in batch.TRAIN_PARTS
+    assert batch.TEST_PART not in batch.val_parts(done)
+    batch.check_split_parts(batch.train_parts(done), batch.val_parts(done))
+    for bad_train in ([0, 1, 8], [2, 9]):
+        with pytest.raises(ValueError):
+            batch.check_split_parts(bad_train, [8])
+    with pytest.raises(ValueError):
+        batch.check_split_parts([0, 1], [8, 9])
 
 
 def test_delete_done_zips_needs_pipeline_ok_and_done(tmp_path):

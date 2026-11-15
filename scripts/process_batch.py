@@ -12,6 +12,7 @@ import json
 import sys
 import time
 import zipfile
+from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
@@ -122,10 +123,12 @@ def main():
             reals = [r for r in rows if r["label"] == "REAL"]
             scored = [r for r in rows if r["label"] == "FAKE" and r["status"] == "ok"]
             n_flag = sum(1 for r in scored if str(r["flagged"]) == "1")
+            per_real = Counter(r["original"] for r in scored)  # evaluation groups by original video (PLAN 7.1)
             info = dict(
                 part=part, gates_pass=True, gates=results,
                 reals=len(reals), reals_ok=sum(1 for r in reals if r["status"] == "ok"),
                 fakes_scored=len(scored), fakes_usable=len(scored) - n_flag, fakes_flagged=n_flag,
+                max_fakes_per_real=max(per_real.values(), default=0),
                 score_percentiles=pct, settings=stats["config"],
                 zip_name=path.name, zip_bytes=path.stat().st_size,
                 crops_bytes=dir_size(out_dir), extraction_seconds=stats["seconds"],

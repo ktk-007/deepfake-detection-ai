@@ -100,7 +100,7 @@ def main():
     if not split_path.exists():
         tr, va = grouped_split(list(groups), 0.2, seed=0)
         save_split(split_path, tr, va, parts=list(SMOKE_PARTS), seed=0, val_frac=0.2,
-                   note="temporary validation until parts 48 and 49 are extracted")
+                   note="temporary validation until part 08 is extracted")
         log.info(f"temp split written: {split_path}")
     split = load_split(split_path)
     train_g = [groups[k] for k in split["train"] if k in groups]

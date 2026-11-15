@@ -1,4 +1,4 @@
-"""Batch bookkeeping: the download plan, DONE.json, zip deletion after the smoke test (PLAN 6.1, 7.2)."""
+"""Batch bookkeeping: the download plan, part roles, DONE.json, zip deletion after the smoke test (PLAN 6, 7.1)."""
 import json
 import shutil
 from pathlib import Path
@@ -6,7 +6,13 @@ from pathlib import Path
 from ..common import CROPS_DIR, PIPELINE_OK, ZIP_DIR
 from .dfdc_zip import find_part_zips
 
-BATCHES = [(0, 1), (48, 49), (2, 3), (4, 5), (6, 7), (8, 9), (10, 11), (12, 13)]
+BATCHES = [(0, 1), (2, 8), (3, 9), (4, 5), (6, 7)]
+
+# Part roles (PLAN 7.1, 4.3). Part 09 is the DFDC test set: never loaded for training or validation.
+TRAIN_PARTS = tuple(range(8))
+VAL_PART = 8
+TEST_PART = 9
+EVAL_PARTS = (VAL_PART, TEST_PART)
 
 
 def part_dir(part: int, crops_dir: Path = CROPS_DIR) -> Path:
@@ -31,15 +37,32 @@ def done_parts(crops_dir: Path = CROPS_DIR) -> set[int]:
 
 
 def next_message(done: set[int]) -> str:
-    for a, b in BATCHES:
-        if a not in done or b not in done:
-            return (f'download dfdc_train_part_{a:02d}.zip and dfdc_train_part_{b:02d}.zip into "zip data\\", '
-                    f"then run: python scripts\\process_batch.py")
-    return "all planned batches are done. Run the learning-curve job (E5) to decide on more parts."
+    """Names the next missing part or parts. A batch may be processed one zip at a time."""
+    for batch in BATCHES:
+        missing = [p for p in batch if p not in done]
+        if missing:
+            names = " and ".join(f"dfdc_train_part_{p:02d}.zip" for p in missing)
+            return f'download {names} into "zip data\\", then run: python scripts\\process_batch.py'
+    return "DFDC done. Run E5 (learning curve), then download FF++ (section 7.4)."
+
+
+def check_split_parts(train: list[int] | tuple[int, ...], val: list[int] | tuple[int, ...]) -> None:
+    """Raise if training touches the validation or test part, or validation touches the test part."""
+    bad_train = sorted(set(train) - set(TRAIN_PARTS))
+    if bad_train:
+        raise ValueError(f"training split includes non-training parts {bad_train}; train parts are 00-07 only")
+    if TEST_PART in set(val):
+        raise ValueError(f"validation split includes the test part {TEST_PART:02d}")
 
 
 def train_parts(done: set[int]) -> list[int]:
-    return sorted(p for p in done if p not in BATCHES[1])
+    """Extracted parts that may be trained on (00-07 only)."""
+    return sorted(p for p in done if p in TRAIN_PARTS)
+
+
+def val_parts(done: set[int]) -> list[int]:
+    """[8] once part 08 is extracted, else [] (keep using data\\splits\\temp_val.json until then)."""
+    return [VAL_PART] if VAL_PART in done else []
 
 
 def dir_size(p: Path) -> int:
