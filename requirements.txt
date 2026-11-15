@@ -1,0 +1,21 @@
+# Pinned to the versions installed and tested on the development laptop (Python 3.12.4, CUDA 13.2 wheels).
+# Install torch/torchvision first from the CUDA index:
+#   pip install torch==2.15.0 torchvision==0.29.2 --index-url https://download.pytorch.org/whl/cu132
+# facenet-pytorch must be installed separately with --no-deps (its pins would downgrade torch):
+#   pip install facenet-pytorch==2.6.0 --no-deps
+torch==2.15.0
+torchvision==0.29.2
+open_clip_torch==4.2.2
+timm==1.0.31
+opencv-python==5.0.0.93
+numpy==2.5.4
+pillow==13.0.0
+pandas==3.1.1
+scikit-learn==1.9.1
+tqdm==4.70.1
+PyYAML==6.0.3
+huggingface_hub==2.4.0
+safetensors==0.8.0
+fastapi==0.163.1
+uvicorn==0.54.0
+pytest==9.2.0

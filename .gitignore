@@ -1,0 +1,31 @@
+# Data, incoming zips, run outputs, logs
+/data/
+/zip data/
+/runs/
+/logs/
+/_old/
+
+# Environment
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Secrets (never commit)
+.env*
+*.pem
+*.key
+*token*
+credentials*
+kaggle.json
+.kaggle/
+
+# Large model files (small trainable-only checkpoints in weights/ stay tracked)
+*.pth
+*.ckpt
+*.bin
+*.onnx
+!weights/*.pt
+weights/*_full.pt

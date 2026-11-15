@@ -1,0 +1,9 @@
+[project]
+name = "unmask"
+version = "0.1.0"
+description = "Video deepfake (face-swap) detection: CLIP with LayerNorm tuning, trained on DFDC, tested on Celeb-DF v2"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
