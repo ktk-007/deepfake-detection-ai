@@ -113,7 +113,6 @@ def main():
     kw = dict(num_workers=args.workers, pin_memory=True, collate_fn=collate,
               persistent_workers=args.workers > 0)
     train_dl = DataLoader(ItemDataset(build_augment("light")), batch_sampler=sampler, **kw)
-    val_dl = DataLoader(EvalFrames(val_g), batch_size=128, shuffle=False, **kw)
 
     # ---------------------------------------------------------------- model
     log.info("loading CLIP ViT-B/16 (OpenAI weights; the first run downloads about 0.6 GB)")
@@ -152,7 +151,7 @@ def main():
             losses.append(loss.item())
             n_img += x.size(0)
             step += 1
-            bar.set_description(f"smoke: epoch {epoch} step {step}/{args.steps}")
+            bar.set_description(f"smoke: pass {epoch + 1} over the training videos, step {step}/{args.steps}")
             bar.set_postfix(loss=f"{loss.item():.3f}", ce=f"{parts['ce']:.3f}", align=f"{parts['align']:.3f}",
                             unif=f"{parts['unif']:.3f}", img_s=f"{n_img / (time.time() - t_train):.0f}")
             bar.update(1)
@@ -173,6 +172,10 @@ def main():
         return finish(False)
 
     # ---------------------------------------------------------------- validate
+    # Shut the persistent training workers down first: each worker loads torch + CUDA DLLs, and on Windows
+    # a second set of workers can exhaust the paging file (WinError 1455). Validation decodes in-process.
+    del train_dl
+    val_dl = DataLoader(EvalFrames(val_g), batch_size=128, shuffle=False, num_workers=0, collate_fn=collate)
     log.info(f"validating on {len(val_dl.dataset)} frames")
     probs, labels, keys = predict(model, tqdm(val_dl, desc="smoke: validation", unit="batch", dynamic_ncols=True),
                                   device)

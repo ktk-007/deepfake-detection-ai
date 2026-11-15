@@ -34,7 +34,7 @@ def next_message(done: set[int]) -> str:
     for a, b in BATCHES:
         if a not in done or b not in done:
             return (f'download dfdc_train_part_{a:02d}.zip and dfdc_train_part_{b:02d}.zip into "zip data\\", '
-                    f"then run the same command.")
+                    f"then run: python scripts\\process_batch.py")
     return "all planned batches are done. Run the learning-curve job (E5) to decide on more parts."
 
 
