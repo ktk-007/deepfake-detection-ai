@@ -11,6 +11,7 @@ Writes runs\\<name>\\: config.json, metrics.csv, last.pt (resume state), best.pt
 val_best.csv (part-08 video scores of the best epoch), and appends one row to results\\results.csv.
 """
 import argparse
+import json
 import math
 import sys
 import time
@@ -28,6 +29,7 @@ from unmask.common import CROPS_DIR, PROJECT_ROOT, RUNS_DIR, setup_logger  # noq
 from unmask.data.augment import build_augment  # noqa: E402
 from unmask.data.batch import VAL_PART, check_split_parts, done_parts, free_gb, train_parts  # noqa: E402
 from unmask.data.dataset import ItemDataset, PairedBatchSampler, collate, load_groups  # noqa: E402
+from unmask.data.splits import group_key  # noqa: E402
 from unmask.models.build import ARCH_DEFAULTS, build_model, check_quickgelu  # noqa: E402
 from unmask.train.loop import (METRIC_FIELDS, RESULT_FIELDS, EarlyStop, append_csv, dump_json,  # noqa: E402
                                eval_items, load_trainable, loss_for, save_best, save_last, seed_everything,
@@ -36,6 +38,15 @@ from unmask.train.loop import (METRIC_FIELDS, RESULT_FIELDS, EarlyStop, append_c
 RESULTS_CSV = PROJECT_ROOT / "results" / "results.csv"
 BENCH_CSV = PROJECT_ROOT / "results" / "bench.csv"
 VRAM_LIMIT_GB = 5.2
+HOLDOUT_JSON = PROJECT_ROOT / "data" / "app_test" / "app_holdout.json"
+
+
+def holdout_keys(path: Path) -> set[str]:
+    """Group keys (part/real video) kept out of training so the app can be checked on unseen videos."""
+    if not path or not Path(path).exists():
+        return set()
+    d = json.loads(Path(path).read_text(encoding="utf-8"))
+    return {group_key(d["part"], d["real"])}
 
 BASE = dict(arch="vit_b16", linear_probe=False, parts=None, epochs=20, patience=5, smooth=3,
             frames_per_video=4, warmup_epochs=1, min_lr=1e-6, aug="light", unpaired=False,
@@ -77,6 +88,7 @@ def parse_args(argv=None):
     ap.add_argument("--crops-dir", type=Path, default=CROPS_DIR, help=argparse.SUPPRESS)
     ap.add_argument("--runs-dir", type=Path, default=RUNS_DIR, help=argparse.SUPPRESS)
     ap.add_argument("--results", type=Path, default=RESULTS_CSV, help=argparse.SUPPRESS)
+    ap.add_argument("--holdout", type=Path, default=HOLDOUT_JSON, help=argparse.SUPPRESS)
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu", help=argparse.SUPPRESS)
     return ap.parse_args(argv)
 
@@ -144,6 +156,10 @@ def main(argv=None):
 
     seed_everything(cfg["seed"])
     groups = load_groups(parts, args.crops_dir, include_flagged=cfg["include_flagged"])
+    held = holdout_keys(args.holdout)
+    dropped = sorted(k for k in held if groups.pop(k, None) is not None)
+    if dropped:
+        log.info(f"app-test hold-out: excluded group(s) {dropped} (real + all its fakes) from training")
     val_groups = list(load_groups([VAL_PART], args.crops_dir, include_flagged=False).values())
     overlap = set(groups) & {g.key for g in val_groups}
     if overlap:
@@ -241,6 +257,7 @@ def main(argv=None):
     if not args.resume:
         dump_json(run_dir / "config.json", dict(cfg, name=name, started=datetime.now().isoformat(timespec="seconds"),
                                                 train_reals=len(train_g), train_fakes=n_fakes,
+                                                holdout_excluded=dropped,
                                                 val_videos=n_val_videos, steps_per_epoch=steps_per_epoch))
     log.info(f"run folder: {run_dir} | log: {log_path}")
     stop_reason, epochs_this_session, img_s_all = "finished all epochs", 0, []

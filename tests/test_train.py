@@ -56,6 +56,7 @@ def crops(tmp_path):
 def _args(tmp_path, crops, *extra):
     return ["--arch", "tiny", "--device", "cpu", "--workers", "0", "--crops-dir", str(crops),
             "--runs-dir", str(tmp_path / "runs"), "--results", str(tmp_path / "results.csv"),
+            "--holdout", str(tmp_path / "no_holdout.json"),
             "--batch", "8", "--frames-per-video", "2", "--val-frames", "4", "--val-batch", "16", *extra]
 
 
@@ -129,3 +130,13 @@ def test_train_stop_resume_and_outputs(tmp_path, crops):
     assert cfg["parts"] == [0, 1] and 9 not in cfg["parts"]
     scores = list(csv.DictReader(open(run / "val_best.csv", encoding="utf-8")))
     assert len(scores) == 6 * 3 and all(s["video"].startswith("08/") for s in scores)
+
+
+def test_app_holdout_group_excluded_from_training(tmp_path, crops):
+    h = tmp_path / "hold.json"
+    h.write_text(json.dumps({"part": 1, "real": "p1r3.mp4", "fake": "p1r3f0.mp4"}))
+    args = _args(tmp_path, crops, "--name", "h", "--epochs", "1")
+    args[args.index("--holdout") + 1] = str(h)
+    train_script.main(args)
+    cfg = json.loads((tmp_path / "runs" / "h" / "config.json").read_text())
+    assert cfg["holdout_excluded"] == ["01/p1r3.mp4"] and cfg["train_reals"] == 15
