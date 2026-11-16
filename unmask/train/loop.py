@@ -54,18 +54,24 @@ def eval_items(groups, frames_per_video: int = 0) -> list[tuple[str, int, str]]:
 
 @torch.no_grad()
 def predict_items(model, items, device, batch_size: int = 128, threads: int = 6, progress=None,
-                  autocast: bool = True) -> tuple[np.ndarray, np.ndarray, list[str]]:
+                  autocast: bool = True, transform=None) -> tuple[np.ndarray, np.ndarray, list[str]]:
     """Frame fake-probabilities for items, decoding JPEGs in a thread pool (no extra worker processes,
-    so no second set of DataLoader workers next to the training ones; WinError 1455)."""
+    so no second set of DataLoader workers next to the training ones; WinError 1455).
+    transform: optional deterministic uint8 CHW -> uint8 CHW function (the part-08 stress views)."""
     model.eval()
     probs, labels, keys = [], [], []
     batches = [items[i:i + batch_size] for i in range(0, len(items), batch_size)]
+
+    def load(it):
+        img = load_image(it[0])
+        return transform(img) if transform is not None else img
+
     with ThreadPoolExecutor(threads) as pool:
-        nxt = pool.map(lambda it: load_image(it[0]), batches[0]) if batches else None
+        nxt = pool.map(load, batches[0]) if batches else None
         for b, chunk in enumerate(batches):
             imgs = list(nxt)
             if b + 1 < len(batches):
-                nxt = pool.map(lambda it: load_image(it[0]), batches[b + 1])  # prefetch the next batch
+                nxt = pool.map(load, batches[b + 1])  # prefetch the next batch
             x = torch.stack(imgs).to(device, non_blocking=True).float().div_(255)
             with torch.autocast(device_type="cuda", dtype=torch.bfloat16, enabled=autocast and device == "cuda"):
                 logits, _ = model(x)
@@ -218,6 +224,28 @@ def save_best(path: Path, model, epoch: int, config: dict, metrics: dict):
     tmp.replace(path)
 
 
+def save_epoch(path: Path, model, epoch: int, config: dict, metrics: dict):
+    """Per-epoch trainable tensors (CLIP: about 0.2 MB) for epoch averaging (PLAN 9.6)."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(".tmp")
+    torch.save(dict(kind="epoch", config=config, arch=model.arch, linear_probe=model.linear_probe,
+                    trainable=model.trainable_state_dict(), epoch=epoch, val=metrics), tmp)
+    tmp.replace(path)
+
+
+def load_model_checkpoint(path: Path, device: str = "cpu"):
+    """Rebuild a model from best.pt / avg.pt / ep_NN.pt / last.pt. Frozen CLIP weights come from open_clip's
+    cache; EfficientNet and the test model carry every tensor, so no download is needed for them."""
+    from ..models.build import build_model
+
+    ck = torch.load(path, map_location="cpu", weights_only=False)
+    arch = ck["arch"]
+    model = build_model(arch, linear_probe=ck.get("linear_probe", False), grad_ckpt=False,
+                        pretrained=arch in ("vit_b16", "vit_l14"))
+    load_trainable(model, ck["trainable"])
+    return model.to(device).eval(), ck
+
+
 def load_trainable(model, state: dict):
     """Load trainable tensors (strict about what must be there)."""
     missing, unexpected = model.load_state_dict(state, strict=False)
@@ -236,17 +264,66 @@ METRIC_FIELDS = ["epoch", "loss", "ce", "align", "unif", "val_auc", "val_ap", "v
 RESULT_FIELDS = ["finished", "name", "arch", "linear_probe", "loss", "aug", "paired", "include_flagged",
                  "train_parts", "train_reals", "val_part", "val_videos", "val_frames", "batch", "lr", "seed",
                  "epochs_run", "best_epoch", "val_auc", "val_ap", "val_eer", "val_logloss", "img_s",
-                 "peak_vram_gb", "minutes", "note"]
+                 "peak_vram_gb", "minutes", "note",
+                 # filled by scripts\eval_val.py and scripts\average_ckpt.py (PLAN 9.5, 9.6)
+                 "val_clean", "val_tight", "val_degraded", "val_robust", "avg_epochs", "avg_val_robust",
+                 "avg_used"]
+
+
+def _read_rows(path: Path) -> tuple[list[str], list[dict]]:
+    if not path.exists():
+        return [], []
+    with open(path, newline="", encoding="utf-8") as f:
+        r = csv.DictReader(f)
+        return list(r.fieldnames or []), list(r)
+
+
+def _write_rows(path: Path, fields: list[str], rows: list[dict]):
+    tmp = path.with_suffix(".tmp")
+    with open(tmp, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
+        w.writeheader()
+        for row in rows:
+            w.writerow({k: row.get(k, "") for k in fields})
+    tmp.replace(path)
+
+
+def _widen(path: Path, fields: list[str]) -> list[str]:
+    """Rewrite the file with `fields` (plus any extra old columns at the end) if its header differs.
+    Existing rows are kept unchanged; new columns are empty."""
+    old, rows = _read_rows(path)
+    if not old or old == fields:
+        return fields
+    full = list(fields) + [c for c in old if c not in fields]
+    if full != old:
+        _write_rows(path, full, rows)
+    return full
 
 
 def append_csv(path: Path, fields: list[str], row: dict):
     path.parent.mkdir(parents=True, exist_ok=True)
     new = not path.exists()
+    if not new:
+        fields = _widen(path, fields)
     with open(path, "a", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
         if new:
             w.writeheader()
         w.writerow({k: _fmt(row.get(k, "")) for k in fields})
+
+
+def update_result(path: Path, name: str, values: dict, fields: list[str] = RESULT_FIELDS) -> bool:
+    """Set `values` on the last row of run `name` (widening the header if needed). False if no such row."""
+    if not path.exists():
+        return False
+    fields = _widen(path, fields)
+    _, rows = _read_rows(path)
+    idx = [i for i, r in enumerate(rows) if r.get("name") == name]
+    if not idx:
+        return False
+    rows[idx[-1]].update({k: _fmt(v) for k, v in values.items()})
+    _write_rows(path, fields, rows)
+    return True
 
 
 def _fmt(v):

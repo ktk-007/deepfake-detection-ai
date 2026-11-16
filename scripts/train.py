@@ -36,13 +36,19 @@ from unmask.data.dataset import ItemDataset, PairedBatchSampler, collate, load_g
 from unmask.data.splits import group_key  # noqa: E402
 from unmask.models.build import ARCH_DEFAULTS, build_model, check_quickgelu  # noqa: E402
 from unmask.train.loop import (METRIC_FIELDS, RESULT_FIELDS, EarlyStop, append_csv, dump_json,  # noqa: E402
-                               eval_items, load_trainable, loss_for, save_best, save_last, seed_everything,
+                               eval_items, load_trainable, loss_for, save_best, save_epoch, save_last,
+                               seed_everything,
                                set_rng_state, train_epoch, validate, warmup_cosine, write_val_scores)
 
 RESULTS_CSV = PROJECT_ROOT / "results" / "results.csv"
 BENCH_CSV = PROJECT_ROOT / "results" / "bench.csv"
 VRAM_LIMIT_GB = 5.2
 HOLDOUT_JSON = PROJECT_ROOT / "data" / "app_test" / "app_holdout.json"
+
+
+def disk_free_gb() -> float:
+    """Free disk on the project drive (a function so tests can replace it)."""
+    return free_gb(PROJECT_ROOT)
 
 
 def holdout_keys(path: Path) -> set[str]:
@@ -75,7 +81,7 @@ def parse_args(argv=None):
     ap.add_argument("--weight-decay", type=float)
     ap.add_argument("--warmup-epochs", type=float)
     ap.add_argument("--min-lr", type=float)
-    ap.add_argument("--aug", choices=["none", "light", "strong"])
+    ap.add_argument("--aug", choices=["none", "light", "strong", "robust"])
     ap.add_argument("--loss", choices=["gend", "ce"], help="gend = CE + 0.1 align + 0.5 unif; ce = CE only")
     ap.add_argument("--label-smoothing", type=float)
     ap.add_argument("--unpaired", action="store_true", default=None, help="E4b: fakes from other originals")
@@ -94,6 +100,9 @@ def parse_args(argv=None):
     ap.add_argument("--runs-dir", type=Path, default=RUNS_DIR, help=argparse.SUPPRESS)
     ap.add_argument("--results", type=Path, default=RESULTS_CSV, help=argparse.SUPPRESS)
     ap.add_argument("--holdout", type=Path, default=HOLDOUT_JSON, help=argparse.SUPPRESS)
+    ap.add_argument("--min-free-gb", type=float, default=6.0,
+                    help="free disk is checked at the start of every epoch; below this the run stops after that "
+                         "epoch (resume later)")
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu", help=argparse.SUPPRESS)
     return ap.parse_args(argv)
 
@@ -273,6 +282,10 @@ def main(argv=None):
         for epoch in range(start_epoch, cfg["epochs"]):
             sampler.set_epoch(epoch)
             tag = f"epoch {epoch + 1}/{cfg['epochs']}"
+            free_now = disk_free_gb()
+            low_disk = free_now < args.min_free_gb
+            log.info(f"{tag}: free disk {free_now:.1f} GB"
+                     + (f" (below {args.min_free_gb:g} GB: stopping after this epoch)" if low_disk else ""))
             bar = tqdm(total=steps_per_epoch, desc=f"{tag} train", unit="step", dynamic_ncols=True)
             tr = train_epoch(model, loader, opt, sched, params, loss_cfg, device, bar=bar, max_steps=args.max_steps)
             bar.close()
@@ -295,6 +308,8 @@ def main(argv=None):
                        lr_end=sched.get_last_lr()[0], img_s=tr["img_s"], train_s=tr["seconds"], val_s=val_s,
                        best="*" if new_best else "", checkpoint=str(best_path if new_best else last_path))
             history.append(row)
+            if cfg["arch"] != "effb4":  # small trainable tensors for epoch averaging (PLAN 9.6)
+                save_epoch(run_dir / f"ep_{epoch + 1:02d}.pt", model, epoch, cfg, m)
             save_last(last_path, model, opt, sched, epoch, stopper, cfg, history)
             (run_dir / "metrics.csv").unlink(missing_ok=True)
             for r in history:
@@ -307,6 +322,10 @@ def main(argv=None):
             if stop:
                 stop_reason = (f"early stop: smoothed AUC ({stopper.smooth} epochs) flat for {stopper.patience} "
                                f"epochs")
+                break
+            if low_disk and epoch + 1 < cfg["epochs"]:
+                stop_reason = (f"stopped: free disk {free_now:.1f} GB was below {args.min_free_gb:g} GB at the "
+                               f"start of epoch {epoch + 1}; free space, then resume")
                 break
             if args.stop_after and epochs_this_session >= args.stop_after and epoch + 1 < cfg["epochs"]:
                 stop_reason = f"stopped after {epochs_this_session} epoch(s) as asked (--stop-after)"

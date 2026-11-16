@@ -1,0 +1,10 @@
+# A1 (Stage A reference = E2 on the development set): ViT-B/16, LayerNorm + head, paired, GenD loss,
+# light aug, lr 3e-4, seed 0. Stage A: parts 00-05, 8 epochs, no early stop (PLAN 9.4, 10.1).
+arch: vit_b16
+aug: light
+loss: gend
+lr: 3.0e-4
+seed: 0
+parts: dev
+epochs: 8
+patience: 0
