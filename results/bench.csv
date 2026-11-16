@@ -1,0 +1,3 @@
+when,arch,batch,grad_ckpt,steps,img_s,peak_vram_gb
+2026-11-16T13:54:39,vit_l14,32,True,100,27.04798,2.02802
+2026-11-16T13:59:02,effb4,32,False,100,79.90223,3.74305

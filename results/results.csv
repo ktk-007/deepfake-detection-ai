@@ -1,0 +1,2 @@
+finished,name,arch,linear_probe,loss,aug,paired,include_flagged,train_parts,train_reals,val_part,val_videos,val_frames,batch,lr,seed,epochs_run,best_epoch,val_auc,val_ap,val_eer,val_logloss,img_s,peak_vram_gb,minutes,note
+2026-11-16T13:33:38,gate2_b16,vit_b16,False,gend,light,True,False,0 1 2,424,8,1136,8,64,0.00030,0,2,2,0.75406,0.91473,0.34674,0.68338,94.13503,4.27975,1.29705,
