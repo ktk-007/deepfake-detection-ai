@@ -191,12 +191,14 @@ def test_gates_detect_missing_real_and_missing_jpeg(synthetic_zip, tmp_path):
 # ---------------------------------------------------------------- batch bookkeeping
 def test_next_message_follows_batch_table():
     assert "part_00" in batch.next_message(set())
-    msg = batch.next_message({0, 1})
-    assert "part_02" in msg and "part_08" in msg
-    msg = batch.next_message({0, 1, 2})            # one zip at a time: names only the missing part
-    assert "part_08" in msg and "part_02" not in msg
+    msg = batch.next_message({0, 1})               # one zip at a time: names a single part
+    assert "part_02" in msg and "part_08" not in msg and "16 GB" in msg
+    assert "part_08" in batch.next_message({0, 1, 2})
     assert "part_03" in batch.next_message({0, 1, 2, 8})
-    assert "DFDC done" in batch.next_message(set(range(10)))
+    assert "part_10" in batch.next_message(set(range(10)))
+    assert "part_11" in batch.next_message(set(range(11)))
+    assert "part_19" in batch.next_message(set(range(19)))
+    assert "DFDC done" in batch.next_message(set(range(20)))
 
 
 def test_eval_parts_get_32_frames():
@@ -206,15 +208,17 @@ def test_eval_parts_get_32_frames():
 
 
 def test_test_part_never_in_train_or_val():
-    """Part 08 is validation only, part 09 is test only (PLAN 4.3)."""
-    done = set(range(10))
-    assert batch.train_parts(done) == list(range(8))
+    """Training: 00-07 and 10-19. Part 08 is validation only, part 09 is test only (PLAN 4.3)."""
+    done = set(range(20))
+    assert batch.train_parts(done) == list(range(8)) + list(range(10, 20))
     assert batch.val_parts(done) == [8]
     assert batch.val_parts(set(range(8))) == []
     assert 8 not in batch.TRAIN_PARTS and 9 not in batch.TRAIN_PARTS
+    assert batch.DEV_PARTS == (0, 1, 2, 3, 4, 5) and set(batch.DEV_PARTS) <= set(batch.TRAIN_PARTS)
     assert batch.TEST_PART not in batch.val_parts(done)
     batch.check_split_parts(batch.train_parts(done), batch.val_parts(done))
-    for bad_train in ([0, 1, 8], [2, 9]):
+    batch.check_split_parts(list(range(10, 20)), [8])                  # parts 10-19 may train
+    for bad_train in ([0, 1, 8], [2, 9], [10, 19, 9], [12, 8], [20]):
         with pytest.raises(ValueError):
             batch.check_split_parts(bad_train, [8])
     with pytest.raises(ValueError):

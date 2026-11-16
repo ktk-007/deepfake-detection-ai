@@ -140,3 +140,13 @@ def test_app_holdout_group_excluded_from_training(tmp_path, crops):
     train_script.main(args)
     cfg = json.loads((tmp_path / "runs" / "h" / "config.json").read_text())
     assert cfg["holdout_excluded"] == ["01/p1r3.mp4"] and cfg["train_reals"] == 15
+
+
+def test_parts_dev_and_every_config_loads():
+    cfg = train_script.resolve_config(train_script.parse_args(["--parts", "dev"]))
+    assert cfg["parts"] == [0, 1, 2, 3, 4, 5]
+    for y in sorted((ROOT / "configs").glob("*.yaml")):
+        cfg = train_script.resolve_config(train_script.parse_args(["--config", str(y)]))
+        assert cfg["epochs"] > 0, y.name
+        if cfg["parts"] is not None:
+            assert not {8, 9} & set(cfg["parts"]), y.name

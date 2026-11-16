@@ -3,3 +3,6 @@ arch: effb4
 aug: strong
 loss: ce
 label_smoothing: 0.01
+# Stage B (PLAN 9.4): 10 epochs, early stop after 4 without improvement
+epochs: 10
+patience: 4

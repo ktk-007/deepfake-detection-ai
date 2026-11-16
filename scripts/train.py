@@ -1,9 +1,12 @@
 """Train one model on DFDC crops, validating on part 08 every epoch (PLAN 9).
 
-Training parts: 00-07 (default: every extracted one). Validation: part 08 only. Part 09 and the outside test
-sets are never loaded here. Settings: built-in defaults < per-arch defaults < --config YAML < command-line flags.
+Training parts: 00-07 and 10-19 (default: every extracted one; --parts dev = 00-05, the Stage A development
+set). Validation: part 08 only. Part 09 and the outside test sets are never loaded here. The app-test hold-out
+group (data\\app_test\\app_holdout.json) is excluded from training. Settings: built-in defaults < per-arch
+defaults < --config YAML < command-line flags. Epochs and patience per stage are set in the configs.
 
   python scripts\\train.py --name e2_b16 --config configs\\e2_b16_ln.yaml
+  python scripts\\train.py --name a1_light --config configs\\a1_light.yaml --parts dev
   python scripts\\train.py --name e2_b16 --resume                     (continue after an interruption)
   python scripts\\train.py --bench 100 --arch vit_l14                 (speed and VRAM check, no run saved)
 
@@ -27,7 +30,8 @@ from tqdm import tqdm  # noqa: E402
 
 from unmask.common import CROPS_DIR, PROJECT_ROOT, RUNS_DIR, setup_logger  # noqa: E402
 from unmask.data.augment import build_augment  # noqa: E402
-from unmask.data.batch import VAL_PART, check_split_parts, done_parts, free_gb, train_parts  # noqa: E402
+from unmask.data.batch import (DEV_PARTS, VAL_PART, check_split_parts, done_parts, free_gb,  # noqa: E402
+                               train_parts)
 from unmask.data.dataset import ItemDataset, PairedBatchSampler, collate, load_groups  # noqa: E402
 from unmask.data.splits import group_key  # noqa: E402
 from unmask.models.build import ARCH_DEFAULTS, build_model, check_quickgelu  # noqa: E402
@@ -60,7 +64,8 @@ def parse_args(argv=None):
     ap.add_argument("--config", type=Path, help="YAML file with any of the settings below")
     ap.add_argument("--arch", choices=sorted(ARCH_DEFAULTS))
     ap.add_argument("--linear-probe", action="store_true", default=None, help="CLIP: train the head only (E1)")
-    ap.add_argument("--parts", help="training parts, e.g. 0,1,2 (default: every extracted part 00-07)")
+    ap.add_argument("--parts", help="training parts: 'dev' (00-05, Stage A) or e.g. 0,1,2 "
+                                    "(default: every extracted training part, 00-07 and 10-19)")
     ap.add_argument("--epochs", type=int)
     ap.add_argument("--patience", type=int, help="early stop after N epochs without smoothed improvement (0 = off)")
     ap.add_argument("--smooth", type=int, help="epochs averaged for early stopping")
@@ -106,7 +111,10 @@ def resolve_config(args) -> dict:
     cfg = dict(BASE) | ARCH_DEFAULTS[arch] | y | cli
     cfg["arch"] = arch
     if isinstance(cfg["parts"], str):
-        cfg["parts"] = [int(p) for p in cfg["parts"].split(",") if p.strip()]
+        if cfg["parts"].strip().lower() == "dev":
+            cfg["parts"] = list(DEV_PARTS)
+        else:
+            cfg["parts"] = [int(p) for p in cfg["parts"].split(",") if p.strip()]
     if cfg["parts"] is not None:
         cfg["parts"] = sorted(int(p) for p in cfg["parts"])
     per_pair = 2 * cfg["frames_per_video"]

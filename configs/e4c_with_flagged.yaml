@@ -2,3 +2,7 @@
 arch: vit_b16
 aug: light
 include_flagged: true
+# Stage A (PLAN 9.4, 10.1): development set, 8 epochs, no early stop
+parts: dev
+epochs: 8
+patience: 0

@@ -6,10 +6,11 @@ from pathlib import Path
 from ..common import CROPS_DIR, PIPELINE_OK, ZIP_DIR
 from .dfdc_zip import find_part_zips
 
-BATCHES = [(0, 1), (2, 8), (3, 9), (4, 5), (6, 7)]
+BATCHES = [(0, 1), (2, 8), (3, 9), (4, 5), (6, 7), (10, 11), (12, 13), (14, 15), (16, 17), (18, 19)]
 
 # Part roles (PLAN 7.1, 4.3). Part 09 is the DFDC test set: never loaded for training or validation.
-TRAIN_PARTS = tuple(range(8))
+TRAIN_PARTS = tuple(range(0, 8)) + tuple(range(10, 20))
+DEV_PARTS = (0, 1, 2, 3, 4, 5)  # Stage A development set (PLAN 10.1)
 VAL_PART = 8
 TEST_PART = 9
 EVAL_PARTS = (VAL_PART, TEST_PART)
@@ -37,26 +38,27 @@ def done_parts(crops_dir: Path = CROPS_DIR) -> set[int]:
 
 
 def next_message(done: set[int]) -> str:
-    """Names the next missing part or parts. A batch may be processed one zip at a time."""
+    """Names the next missing part, in batch-table order. Zips are downloaded one at a time (owner, 16 Nov):
+    start the next download only with at least 16 GB free."""
     for batch in BATCHES:
         missing = [p for p in batch if p not in done]
         if missing:
-            names = " and ".join(f"dfdc_train_part_{p:02d}.zip" for p in missing)
-            return f'download {names} into "zip data\\", then run: python scripts\\process_batch.py'
-    return "DFDC done. Run E5 (learning curve), then download FF++ (section 7.4)."
+            return (f'download dfdc_train_part_{missing[0]:02d}.zip into "zip data\\" (one zip at a time, start '
+                    f"only with >= 16 GB free), then run: python scripts\\process_batch.py")
+    return "DFDC done. Run the finals queue (section 10.2)."
 
 
 def check_split_parts(train: list[int] | tuple[int, ...], val: list[int] | tuple[int, ...]) -> None:
     """Raise if training touches the validation or test part, or validation touches the test part."""
     bad_train = sorted(set(train) - set(TRAIN_PARTS))
     if bad_train:
-        raise ValueError(f"training split includes non-training parts {bad_train}; train parts are 00-07 only")
+        raise ValueError(f"training split includes non-training parts {bad_train}; train parts are 00-07 and 10-19 only")
     if TEST_PART in set(val):
         raise ValueError(f"validation split includes the test part {TEST_PART:02d}")
 
 
 def train_parts(done: set[int]) -> list[int]:
-    """Extracted parts that may be trained on (00-07 only)."""
+    """Extracted parts that may be trained on (00-07 and 10-19)."""
     return sorted(p for p in done if p in TRAIN_PARTS)
 
 

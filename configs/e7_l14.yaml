@@ -3,3 +3,6 @@ arch: vit_l14
 batch: 32
 grad_ckpt: true
 aug: light
+# Stage B (PLAN 9.4): 10 epochs, early stop after 4 without improvement
+epochs: 10
+patience: 4
