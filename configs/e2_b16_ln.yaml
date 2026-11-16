@@ -1,0 +1,4 @@
+# E2: main development model. CLIP ViT-B/16, LayerNorm + head, paired batches, GenD loss, light aug.
+arch: vit_b16
+aug: light
+loss: gend

@@ -1,0 +1,4 @@
+# E4d: E2 with cross-entropy only (no alignment / uniformity terms).
+arch: vit_b16
+aug: light
+loss: ce

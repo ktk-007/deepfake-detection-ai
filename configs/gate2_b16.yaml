@@ -1,0 +1,5 @@
+# Gate 2 check (PLAN 9.4): 2 epochs on parts 00-02, part-08 validation, resume tested mid-run.
+arch: vit_b16
+parts: [0, 1, 2]
+epochs: 2
+aug: light

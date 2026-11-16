@@ -1,0 +1,5 @@
+# E3: EfficientNet-B4 baseline (DFDC-winner style), all layers trained, strong aug, CE with smoothing 0.01.
+arch: effb4
+aug: strong
+loss: ce
+label_smoothing: 0.01

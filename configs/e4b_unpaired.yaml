@@ -1,0 +1,4 @@
+# E4b: E2 with unpaired batches (each fake drawn from another original). Compare with e2_b16_ln.
+arch: vit_b16
+aug: light
+unpaired: true

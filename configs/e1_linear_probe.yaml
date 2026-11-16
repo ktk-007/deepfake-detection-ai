@@ -1,0 +1,4 @@
+# E1: frozen CLIP ViT-B/16, linear head only. The floor that LayerNorm tuning must beat.
+arch: vit_b16
+linear_probe: true
+aug: light

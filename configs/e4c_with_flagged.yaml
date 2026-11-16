@@ -1,0 +1,4 @@
+# E4c: E2 trained with the flagged (near-identical) fakes included. Validation still excludes them.
+arch: vit_b16
+aug: light
+include_flagged: true
