@@ -1,0 +1,30 @@
+2026-11-17 03:47:34  app-test hold-out: excluded group(s) ['06/yirkaxfwgb.mp4', '18/enyfzkpdeq.mp4'] (real + all its fakes) from training
+2026-11-17 03:47:34  train parts [0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]: 5810 real videos, 18875 usable fakes | val part 08: 277 real / 859 fake videos, 9088 frames (8 per video)
+2026-11-17 03:47:34  model effb4 (first use downloads weights)
+2026-11-17 03:47:35  parameters: total 17,552,202, trainable 17,552,202 (100.000%)
+2026-11-17 03:47:35  batch 32 (4 pairs x 4 frames x 2), 1452 steps/epoch, lr 0.0001 (warm-up 1452 steps, cosine to 1e-06), wd 0.01, loss ce, aug strong, paired, seed 0, workers 4
+2026-11-17 03:47:35  run folder: C:\Projects\Deepfake detection\runs\e3_effb4 | log: C:\Projects\Deepfake detection\logs\train_e3_effb4_20261117_034733.log
+2026-11-17 03:47:35  epoch 1/6: free disk 33.3 GB
+2026-11-17 03:54:07  epoch 1/6: loss 1.0230 (ce 1.0230, align 0.0000, unif 0.0000) | part 08 video AUC 0.8970, AP 0.9665, EER 0.1941 NEW BEST | 126 img/s, train 369 s, val 22 s | C:\Projects\Deepfake detection\runs\e3_effb4\best.pt
+2026-11-17 03:54:07  epoch 2/6: free disk 20.3 GB
+2026-11-17 04:00:18  epoch 2/6: loss 0.4315 (ce 0.4315, align 0.0000, unif 0.0000) | part 08 video AUC 0.9316, AP 0.9765, EER 0.1355 NEW BEST | 132 img/s, train 351 s, val 19 s | C:\Projects\Deepfake detection\runs\e3_effb4\best.pt
+2026-11-17 04:00:18  epoch 3/6: free disk 7.1 GB
+2026-11-17 04:06:29  epoch 3/6: loss 0.3029 (ce 0.3029, align 0.0000, unif 0.0000) | part 08 video AUC 0.9639, AP 0.9888, EER 0.1012 NEW BEST | 132 img/s, train 351 s, val 19 s | C:\Projects\Deepfake detection\runs\e3_effb4\best.pt
+2026-11-17 04:06:29  epoch 4/6: free disk 7.1 GB
+2026-11-17 04:12:40  epoch 4/6: loss 0.2572 (ce 0.2572, align 0.0000, unif 0.0000) | part 08 video AUC 0.9818, AP 0.9942, EER 0.0787 NEW BEST | 132 img/s, train 351 s, val 19 s | C:\Projects\Deepfake detection\runs\e3_effb4\best.pt
+2026-11-17 04:12:40  epoch 5/6: free disk 7.1 GB
+2026-11-17 04:18:51  epoch 5/6: loss 0.2226 (ce 0.2226, align 0.0000, unif 0.0000) | part 08 video AUC 0.9777, AP 0.9932, EER 0.0763 | 132 img/s, train 351 s, val 19 s | C:\Projects\Deepfake detection\runs\e3_effb4\last.pt
+2026-11-17 04:18:51  epoch 6/6: free disk 7.1 GB
+2026-11-17 04:25:02  epoch 6/6: loss 0.2118 (ce 0.2118, align 0.0000, unif 0.0000) | part 08 video AUC 0.9808, AP 0.9941, EER 0.0739 | 132 img/s, train 352 s, val 19 s | C:\Projects\Deepfake detection\runs\e3_effb4\last.pt
+2026-11-17 04:25:04  
+2026-11-17 04:25:04  ==== TRAINING SUMMARY ====
+2026-11-17 04:25:04  run e3_effb4: effb4, parts [0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 5810 train reals, aug strong, loss ce, lr 0.0001, seed 0
+2026-11-17 04:25:04  epochs done 6/6: finished all epochs
+2026-11-17 04:25:04  best epoch 4: part 08 video AUC 0.9818, AP 0.9942, EER 0.0787, log loss 0.1564 (8 frames per video; DFDC numbers are optimistic: shared actors)
+2026-11-17 04:25:04  AUC by epoch: 0.897 0.932 0.964 0.982 0.978 0.981
+2026-11-17 04:25:04  speed 131.2 img/s | peak VRAM 3.75 GB | time 37.5 min
+2026-11-17 04:25:04  checkpoints: C:\Projects\Deepfake detection\runs\e3_effb4\best.pt (best), C:\Projects\Deepfake detection\runs\e3_effb4\last.pt (resume)
+2026-11-17 04:25:04  results row appended to C:\Projects\Deepfake detection\results\results.csv
+2026-11-17 04:25:04  free disk: 7.1 GB
+2026-11-17 04:25:04  NEXT: paste this summary back.
+2026-11-17 04:25:04  ==========================

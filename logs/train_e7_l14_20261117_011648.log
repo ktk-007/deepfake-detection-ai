@@ -1,0 +1,26 @@
+2026-11-17 01:16:48  app-test hold-out: excluded group(s) ['06/yirkaxfwgb.mp4', '18/enyfzkpdeq.mp4'] (real + all its fakes) from training
+2026-11-17 01:16:48  train parts [0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]: 5810 real videos, 18875 usable fakes | val part 08: 277 real / 859 fake videos, 9088 frames (8 per video)
+2026-11-17 01:16:48  model vit_l14 (first use downloads weights)
+2026-11-17 01:16:54  parameters: total 303,181,826, trainable 104,450 (0.034%) | QuickGELU active
+2026-11-17 01:16:54  batch 32 (4 pairs x 4 frames x 2), 1452 steps/epoch, lr 0.0002 (warm-up 1452 steps, cosine to 1e-06), wd 0, loss ce, aug light, paired, seed 0, workers 4
+2026-11-17 01:16:54  run folder: C:\Projects\Deepfake detection\runs\e7_l14 | log: C:\Projects\Deepfake detection\logs\train_e7_l14_20261117_011648.log
+2026-11-17 01:16:54  epoch 1/4: free disk 23.3 GB
+2026-11-17 01:45:43  epoch 1/4: loss 0.5754 (ce 0.5754, align 0.0000, unif 0.0000) | part 08 video AUC 0.9785, AP 0.9937, EER 0.0686 NEW BEST | 28 img/s, train 1631 s, val 98 s | C:\Projects\Deepfake detection\runs\e7_l14\best.pt
+2026-11-17 01:45:43  epoch 2/4: free disk 8.7 GB
+2026-11-17 02:14:26  epoch 2/4: loss 0.3773 (ce 0.3773, align 0.0000, unif 0.0000) | part 08 video AUC 0.9882, AP 0.9965, EER 0.0455 NEW BEST | 29 img/s, train 1625 s, val 98 s | C:\Projects\Deepfake detection\runs\e7_l14\best.pt
+2026-11-17 02:14:26  epoch 3/4: free disk 8.8 GB
+2026-11-17 02:43:08  epoch 3/4: loss 0.3307 (ce 0.3307, align 0.0000, unif 0.0000) | part 08 video AUC 0.9895, AP 0.9968, EER 0.0402 NEW BEST | 29 img/s, train 1624 s, val 98 s | C:\Projects\Deepfake detection\runs\e7_l14\best.pt
+2026-11-17 02:43:08  epoch 4/4: free disk 8.7 GB
+2026-11-17 03:11:50  epoch 4/4: loss 0.3165 (ce 0.3165, align 0.0000, unif 0.0000) | part 08 video AUC 0.9893, AP 0.9968, EER 0.0438 | 29 img/s, train 1624 s, val 98 s | C:\Projects\Deepfake detection\runs\e7_l14\last.pt
+2026-11-17 03:11:54  
+2026-11-17 03:11:54  ==== TRAINING SUMMARY ====
+2026-11-17 03:11:54  run e7_l14: vit_l14, parts [0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 5810 train reals, aug light, loss ce, lr 0.0002, seed 0
+2026-11-17 03:11:54  epochs done 4/4: finished all epochs
+2026-11-17 03:11:54  best epoch 3: part 08 video AUC 0.9895, AP 0.9968, EER 0.0402, log loss 0.2061 (8 frames per video; DFDC numbers are optimistic: shared actors)
+2026-11-17 03:11:54  AUC by epoch: 0.978 0.988 0.989 0.989
+2026-11-17 03:11:54  speed 28.6 img/s | peak VRAM 2.28 GB | time 115.1 min
+2026-11-17 03:11:54  checkpoints: C:\Projects\Deepfake detection\runs\e7_l14\best.pt (best), C:\Projects\Deepfake detection\runs\e7_l14\last.pt (resume)
+2026-11-17 03:11:54  results row appended to C:\Projects\Deepfake detection\results\results.csv
+2026-11-17 03:11:54  free disk: 8.7 GB
+2026-11-17 03:11:54  NEXT: paste this summary back.
+2026-11-17 03:11:54  ==========================

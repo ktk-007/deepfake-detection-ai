@@ -1,7 +1,7 @@
 """Save a 4 x 4 grid of augmented training crops per preset (top two rows real, bottom two fake) to logs\\,
 so the owner can check by eye that faces stay recognisable (PLAN 9.3). CPU only, a few seconds.
 
-  python scripts\\show_aug.py                      (every preset: none, light, strong, robust)
+  python scripts\\show_aug.py                      (every preset: none, light, strong, robust, robust_half)
   python scripts\\show_aug.py --preset robust
 """
 import argparse
@@ -16,11 +16,10 @@ import numpy as np  # noqa: E402
 import torch  # noqa: E402
 
 from unmask.common import CROPS_DIR, LOG_DIR  # noqa: E402
-from unmask.data.augment import build_augment  # noqa: E402
+from unmask.data.augment import PRESETS, build_augment  # noqa: E402
 from unmask.data.batch import DEV_PARTS, done_parts  # noqa: E402
 from unmask.data.dataset import load_groups, load_image  # noqa: E402
 
-PRESETS = ("none", "light", "strong", "robust")
 
 
 def pick_items(crops_dir: Path, n: int = 8, seed: int = 0):

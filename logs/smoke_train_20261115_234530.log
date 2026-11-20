@@ -1,0 +1,19 @@
+2026-11-15 23:45:30  groups: train 155, val 39 (grouped by original video) | val videos: 39 real, 169 fake
+2026-11-15 23:45:30  loading CLIP ViT-B/16 (OpenAI weights; the first run downloads about 0.6 GB)
+2026-11-15 23:45:33  parameters: total 85,800,962, trainable 41,474 (0.048%)
+2026-11-15 23:47:24  trained 150 steps (8 sampler epochs) in 111 s, 86.6 img/s, batch 64, peak VRAM 4.28 GB
+2026-11-15 23:47:25  validating on 3328 frames
+2026-11-15 23:47:48  
+2026-11-15 23:47:48  ==== SMOKE TEST SUMMARY ====
+2026-11-15 23:47:48  1 loss finite: PASS - 150 finite steps
+2026-11-15 23:47:48  2 loss falling: PASS - mean first 20 steps 0.1360 -> last 20 -0.2381
+2026-11-15 23:47:48  3 validation AUC: PASS - video AUC 0.6949, AP 0.9010, 39 real / 169 fake videos
+2026-11-15 23:47:48  4 checkpoint reload: PASS - C:\Projects\Deepfake detection\runs\smoke\last.pt (0.2 MB), max prob diff 0.00e+00
+2026-11-15 23:47:48  deleted dfdc_train_part_00.zip (11.52 GB)
+2026-11-15 23:47:48  deleted dfdc_train_part_01.zip (9.41 GB)
+2026-11-15 23:47:48  pipeline_ok.json written
+2026-11-15 23:47:48  zips deleted: dfdc_train_part_00.zip (11.52 GB), dfdc_train_part_01.zip (9.41 GB)
+2026-11-15 23:47:48  free disk: 30.7 GB | time 2.3 min
+2026-11-15 23:47:48  NEXT: download dfdc_train_part_48.zip and dfdc_train_part_49.zip into "zip data\", then run the same command.
+2026-11-15 23:47:48  log: C:\Projects\Deepfake detection\logs\smoke_train_20261115_234530.log
+2026-11-15 23:47:48  ============================

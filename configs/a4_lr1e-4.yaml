@@ -1,0 +1,9 @@
+# A4 (learning rate): A1 with lr 1e-4. Stage A: parts 00-05, 8 epochs, no early stop (PLAN 10.1).
+arch: vit_b16
+aug: light
+loss: gend
+lr: 1.0e-4
+seed: 0
+parts: dev
+epochs: 8
+patience: 0

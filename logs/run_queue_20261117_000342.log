@@ -1,0 +1,27 @@
+2026-11-17 00:03:42  queue configs\queue_finals.yaml: 6 runs, freeze 2026-11-17 05:00 (no run starts at or after it; the run in progress stops after its current epoch)
+2026-11-17 00:03:42  [1/6] e2_b16: start 00:03, free disk 35.6 GB
+2026-11-17 00:03:42    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\train.py" --name e2_b16 --config configs/e2_b16_ln.yaml --lr 0.0003 --aug light --freeze "2026-11-17 05:00"
+2026-11-17 00:03:42    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\eval_val.py" --run e2_b16
+2026-11-17 00:03:42    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\average_ckpt.py" --run e2_b16
+2026-11-17 01:16:43  [1/6] e2_b16: done in 73 min: epochs 12, best epoch 11, part-08 AUC 0.98180, val_robust 0.96896, averaged used False
+2026-11-17 01:16:43  [2/6] e7_l14: start 01:16, free disk 33.3 GB
+2026-11-17 01:16:43    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\train.py" --name e7_l14 --config configs/e7_l14.yaml --epochs 4 --lr 0.0002 --aug light --freeze "2026-11-17 05:00"
+2026-11-17 01:16:43    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\eval_val.py" --run e7_l14
+2026-11-17 01:16:43    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\average_ckpt.py" --run e7_l14
+2026-11-17 03:32:03  [2/6] e7_l14: done in 135 min: epochs 4, best epoch 3, part-08 AUC 0.98946, val_robust 0.98048, averaged used False
+2026-11-17 03:32:03  [3/6] e1_linear_probe: free disk 18.1 GB below 20 GB; not started
+2026-11-17 03:32:03  [4/6] e3_effb4: free disk 18.1 GB below 20 GB; not started
+2026-11-17 03:32:03  [5/6] e4b_unpaired: free disk 18.1 GB below 20 GB; not started
+2026-11-17 03:32:03  [6/6] e4c_with_flagged: free disk 18.1 GB below 20 GB; not started
+2026-11-17 03:32:03  
+2026-11-17 03:32:03  ==== QUEUE SUMMARY ====
+2026-11-17 03:32:03  freeze 2026-11-17 05:00 | ended 2026-11-17 03:32 | 3.5 h
+2026-11-17 03:32:03  e2_b16: done in 73 min: epochs 12, best epoch 11, part-08 AUC 0.98180, val_robust 0.96896, averaged used False
+2026-11-17 03:32:03  e7_l14: done in 135 min: epochs 4, best epoch 3, part-08 AUC 0.98946, val_robust 0.98048, averaged used False
+2026-11-17 03:32:03  e1_linear_probe: planned, not run (free disk 18.1 GB < 20 GB)
+2026-11-17 03:32:03  e3_effb4: planned, not run (free disk 18.1 GB < 20 GB)
+2026-11-17 03:32:03  e4b_unpaired: planned, not run (free disk 18.1 GB < 20 GB)
+2026-11-17 03:32:03  e4c_with_flagged: planned, not run (free disk 18.1 GB < 20 GB)
+2026-11-17 03:32:03  free disk 18.1 GB | log C:\Projects\Deepfake detection\logs\run_queue_20261117_000342.log
+2026-11-17 03:32:03  NEXT: paste this summary back.
+2026-11-17 03:32:03  =======================

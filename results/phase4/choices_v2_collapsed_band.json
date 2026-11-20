@@ -1,0 +1,198 @@
+{
+ "locked_at": "2026-11-17T06:00:27",
+ "margin": 0.003,
+ "models": {
+  "e7_l14": {
+   "key": "vit_l14",
+   "label": "E7 CLIP ViT-L/14",
+   "ckpt": "C:\\Projects\\Deepfake detection\\runs\\e7_l14\\best.pt",
+   "flip": false,
+   "val_robust": 0.9804841215473173,
+   "val_robust_noflip": 0.9804841215473173,
+   "val_clean32_auc": 0.9899219560987295,
+   "view_auc": {
+    "clean": 0.9893966201989552,
+    "tight": 0.989392417511757,
+    "degraded": 0.9601080931147374
+   },
+   "temperature": 0.6299605249474366,
+   "band": {
+    "low": 0.24916501343250275,
+    "high": 0.24916501343250275,
+    "fitted": true,
+    "real_above_high": 0.032490974729241874,
+    "fake_below_low": 0.04190919674039581
+   },
+   "app": {
+    "temperature": 0.6299605249474366,
+    "low": 0.24916501343250275,
+    "high": 0.24916501343250275,
+    "fitted": true,
+    "real_above_high": 0.032490974729241874,
+    "fake_below_low": 0.04190919674039581
+   }
+  },
+  "e2_b16": {
+   "key": "vit_b16",
+   "label": "E2 CLIP ViT-B/16",
+   "ckpt": "C:\\Projects\\Deepfake detection\\runs\\e2_b16\\best.pt",
+   "flip": false,
+   "val_robust": 0.9689575514584026,
+   "val_robust_noflip": 0.9689575514584026,
+   "val_clean32_auc": 0.9835716957422577,
+   "view_auc": {
+    "clean": 0.9822646600236191,
+    "tight": 0.9660717062489754,
+    "degraded": 0.9563550934467498
+   },
+   "temperature": 0.6869768237290445,
+   "band": {
+    "low": 0.26842984557151794,
+    "high": 0.36577582359313965,
+    "fitted": true,
+    "real_above_high": 0.04693140794223827,
+    "fake_below_low": 0.048894062863795114
+   },
+   "app": {
+    "temperature": 0.6869768237290445,
+    "low": 0.26842984557151794,
+    "high": 0.36577582359313965,
+    "fitted": true,
+    "real_above_high": 0.04693140794223827,
+    "fake_below_low": 0.048894062863795114
+   }
+  },
+  "e3_effb4": {
+   "key": "effb4",
+   "label": "E3 EfficientNet-B4",
+   "ckpt": "C:\\Projects\\Deepfake detection\\runs\\e3_effb4\\best.pt",
+   "flip": false,
+   "val_robust": 0.9752980055447454,
+   "val_robust_noflip": 0.9752980055447454,
+   "val_clean32_auc": 0.9826050776866728,
+   "view_auc": {
+    "clean": 0.9818948235501779,
+    "tight": 0.9859924435684176,
+    "degraded": 0.954308384781229
+   },
+   "temperature": 0.7071067811865475,
+   "band": {
+    "low": 0.635377049446106,
+    "high": 0.7968426942825317,
+    "fitted": true,
+    "real_above_high": 0.04693140794223827,
+    "fake_below_low": 0.048894062863795114
+   },
+   "app": {
+    "temperature": 0.7071067811865475,
+    "low": 0.635377049446106,
+    "high": 0.7968426942825317,
+    "fitted": true,
+    "real_above_high": 0.04693140794223827,
+    "fake_below_low": 0.048894062863795114
+   }
+  },
+  "e1_linear_probe": {
+   "key": "e1",
+   "label": "E1 linear probe (dev set)",
+   "ckpt": "C:\\Projects\\Deepfake detection\\runs\\e1_linear_probe\\best.pt",
+   "flip": false,
+   "val_robust": 0.7034913123451135,
+   "val_robust_noflip": 0.7034913123451135,
+   "val_clean32_auc": 0.7092917211264882,
+   "view_auc": {
+    "clean": 0.7089260873402454,
+    "tight": 0.6969652395741839,
+    "degraded": 0.7045090630949429
+   },
+   "temperature": 0.25,
+   "band": {
+    "low": 0.4422394037246704,
+    "high": 0.5442357659339905,
+    "fitted": true,
+    "real_above_high": 0.04693140794223827,
+    "fake_below_low": 0.048894062863795114
+   },
+   "app": {
+    "temperature": 0.25,
+    "low": 0.4422394037246704,
+    "high": 0.5442357659339905,
+    "fitted": true,
+    "real_above_high": 0.04693140794223827,
+    "fake_below_low": 0.048894062863795114
+   }
+  },
+  "e8_gend": {
+   "key": "e8",
+   "label": "E8 GenD published (FF++)",
+   "ckpt": "C:\\Projects\\Deepfake detection\\runs\\e8_gend\\best.pt",
+   "flip": false,
+   "val_robust": 0.8901305494733333,
+   "val_robust_noflip": 0.8901305494733333,
+   "val_clean32_auc": 0.919695053016899,
+   "view_auc": {
+    "clean": 0.9181064372559815,
+    "tight": 0.9319080620148523,
+    "degraded": 0.8173386063048713
+   },
+   "temperature": 0.7937005259840998,
+   "band": {
+    "low": 0.2240772545337677,
+    "high": 0.7038561105728149,
+    "fitted": true,
+    "real_above_high": 0.04693140794223827,
+    "fake_below_low": 0.048894062863795114
+   },
+   "app": {
+    "temperature": 0.7937005259840998,
+    "low": 0.2240772545337677,
+    "high": 0.7038561105728149,
+    "fitted": true,
+    "real_above_high": 0.04693140794223827,
+    "fake_below_low": 0.048894062863795114
+   }
+  }
+ },
+ "ensemble": {
+  "adopted": true,
+  "members": [
+   "e7_l14",
+   "e3_effb4"
+  ],
+  "val_robust": 0.9862291949472493,
+  "tried": [
+   {
+    "members": [
+     "e7_l14",
+     "e2_b16"
+    ],
+    "val_robust": 0.9788030466680394
+   },
+   {
+    "members": [
+     "e7_l14",
+     "e3_effb4"
+    ],
+    "val_robust": 0.9862291949472493
+   },
+   {
+    "members": [
+     "e7_l14",
+     "e3_effb4",
+     "e2_b16"
+    ],
+    "val_robust": 0.98732189361878
+   }
+  ],
+  "band": {
+   "low": 0.49545692652463913,
+   "high": 0.49545692652463913,
+   "fitted": true,
+   "real_above_high": 0.021660649819494584,
+   "fake_below_low": 0.037252619324796274
+  },
+  "best_single": "e7_l14",
+  "best_single_val_robust": 0.9804841215473173
+ },
+ "note": "All choices made on DFDC part 08 only, before any test set was opened."
+}

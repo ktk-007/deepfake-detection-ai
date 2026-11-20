@@ -1,0 +1,12 @@
+2026-11-17 03:44:51  e1_linear_probe: averaged epochs [2, 3, 8] -> C:\Projects\Deepfake detection\runs\e1_linear_probe\avg.pt
+2026-11-17 03:47:29  e1_linear_probe avg clean    : video AUC 0.7015, AP 0.9029, EER 0.3533 (277 real / 859 fake videos, 51 s)
+2026-11-17 03:47:29  e1_linear_probe avg tight    : video AUC 0.6947, AP 0.9010, EER 0.3616 (277 real / 859 fake videos, 51 s)
+2026-11-17 03:47:29  e1_linear_probe avg degraded : video AUC 0.6969, AP 0.9040, EER 0.3788 (277 real / 859 fake videos, 51 s)
+2026-11-17 03:47:29  e1_linear_probe avg val_robust (mean of the three AUCs): 0.6977
+2026-11-17 03:47:29  
+2026-11-17 03:47:29  ==== AVERAGE_CKPT SUMMARY ====
+2026-11-17 03:47:29  run e1_linear_probe: epochs [2, 3, 8] averaged | val_robust best.pt 0.7035, avg.pt 0.6977 (gain -0.58 points, needs 0.3)
+2026-11-17 03:47:29  decision: use best.pt | results.csv row updated
+2026-11-17 03:47:29  time 2.6 min | free disk 32.9 GB | log C:\Projects\Deepfake detection\logs\average_ckpt_e1_linear_probe_20261117_034451.log
+2026-11-17 03:47:29  NEXT: paste this summary back.
+2026-11-17 03:47:29  ==============================

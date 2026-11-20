@@ -1,0 +1,12 @@
+2026-11-17 04:25:10  scoring runs\e3_effb4\best on part 08 views clean, tight, degraded, 16 frames per video (validation only; no test set is loaded)
+2026-11-17 04:27:12  e3_effb4 best clean    : video AUC 0.9833, AP 0.9947, EER 0.0728 (277 real / 859 fake videos, 40 s)
+2026-11-17 04:27:12  e3_effb4 best tight    : video AUC 0.9869, AP 0.9959, EER 0.0615 (277 real / 859 fake videos, 40 s)
+2026-11-17 04:27:12  e3_effb4 best degraded : video AUC 0.9557, AP 0.9852, EER 0.1255 (277 real / 859 fake videos, 40 s)
+2026-11-17 04:27:12  e3_effb4 best val_robust (mean of the three AUCs): 0.9753
+2026-11-17 04:27:12  results.csv row updated: C:\Projects\Deepfake detection\results\results.csv
+2026-11-17 04:27:12  
+2026-11-17 04:27:12  ==== EVAL_VAL SUMMARY ====
+2026-11-17 04:27:12  run e3_effb4, checkpoint best (epoch 4): clean 0.9833, tight 0.9869, degraded 0.9557 | val_robust 0.9753
+2026-11-17 04:27:12  time 2.0 min | free disk 31.8 GB | log C:\Projects\Deepfake detection\logs\eval_val_e3_effb4_20261117_042510.log
+2026-11-17 04:27:12  NEXT: paste this summary back.
+2026-11-17 04:27:12  ==========================

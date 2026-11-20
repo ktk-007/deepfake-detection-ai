@@ -1,0 +1,12 @@
+2026-11-17 04:39:38  scoring runs\e4b_unpaired\best on part 08 views clean, tight, degraded, 16 frames per video (validation only; no test set is loaded)
+2026-11-17 04:42:15  e4b_unpaired best clean    : video AUC 0.8350, AP 0.9454, EER 0.2633 (277 real / 859 fake videos, 51 s)
+2026-11-17 04:42:15  e4b_unpaired best tight    : video AUC 0.8165, AP 0.9271, EER 0.3071 (277 real / 859 fake videos, 51 s)
+2026-11-17 04:42:15  e4b_unpaired best degraded : video AUC 0.7775, AP 0.9197, EER 0.2923 (277 real / 859 fake videos, 51 s)
+2026-11-17 04:42:15  e4b_unpaired best val_robust (mean of the three AUCs): 0.8097
+2026-11-17 04:42:15  results.csv row updated: C:\Projects\Deepfake detection\results\results.csv
+2026-11-17 04:42:15  
+2026-11-17 04:42:15  ==== EVAL_VAL SUMMARY ====
+2026-11-17 04:42:15  run e4b_unpaired, checkpoint best (epoch 8): clean 0.8350, tight 0.8165, degraded 0.7775 | val_robust 0.8097
+2026-11-17 04:42:15  time 2.6 min | free disk 31.6 GB | log C:\Projects\Deepfake detection\logs\eval_val_e4b_unpaired_20261117_043938.log
+2026-11-17 04:42:15  NEXT: paste this summary back.
+2026-11-17 04:42:15  ==========================

@@ -1,0 +1,15 @@
+2026-11-16 23:45:20  celebdf: zip C:\Projects\Deepfake detection\zip data\Celeb-DF-v2.zip (9.27 GB), free disk 26.6 GB
+2026-11-16 23:45:26  celebdf: 518 videos in List_of_testing_videos.txt; 0 already done, 518 to go
+2026-11-16 23:52:03  celebdf: C1 PASS: 518/518 listed videos have a row, 0 missing from the zip (max 1%)
+2026-11-16 23:52:03  celebdf: C2 PASS: ok 518/518 = 100.0% (need >= 95%)
+2026-11-16 23:52:03  celebdf: C3 PASS: 518/518 ok videos have n_frames JPEGs
+2026-11-16 23:52:03  celebdf: C4 PASS: 200/200 random JPEGs decode at 224x224
+2026-11-16 23:52:03  celebdf: C5 PASS: ok real 178, fake 340; list flag vs folder {'0->FAKE': 340, '1->REAL': 178} (consistent)
+2026-11-16 23:52:03  
+2026-11-16 23:52:03  ==== CELEB-DF SUMMARY ====
+2026-11-16 23:52:03  listed 518 | real ok 178, fake ok 340 | no face 0, read errors 0, missing 0
+2026-11-16 23:52:03  gates PASS | sample sheet C:\Projects\Deepfake detection\data\crops\celebdf_v2_test\_samples.jpg
+2026-11-16 23:52:05  crops: 200 MB in C:\Projects\Deepfake detection\data\crops\celebdf_v2_test | free disk: 26.4 GB | time 6.7 min
+2026-11-16 23:52:05  NEXT: paste this summary back. Do not delete the zip: I will ask first (PLAN section 4).
+2026-11-16 23:52:05  log: C:\Projects\Deepfake detection\logs\prepare_celebdf_20261116_234520.log
+2026-11-16 23:52:05  ==========================

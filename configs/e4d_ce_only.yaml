@@ -1,3 +1,4 @@
+# Superseded by a7_ce.yaml (CE only at lr 1e-4) and a7b_ce_lr3e-4.yaml (CE only at lr 3e-4), 16 Nov.
 # E4d: E2 with cross-entropy only (no alignment / uniformity terms).
 arch: vit_b16
 aug: light

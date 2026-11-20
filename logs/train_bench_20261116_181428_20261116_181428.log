@@ -1,0 +1,11 @@
+2026-11-16 18:14:28  train parts [0, 1, 2, 3, 4, 5]: 1186 real videos, 3761 usable fakes | val part 08: 277 real / 859 fake videos, 9088 frames (8 per video)
+2026-11-16 18:14:28  model vit_b16 (first use downloads weights)
+2026-11-16 18:14:31  parameters: total 85,800,962, trainable 41,474 (0.048%) | QuickGELU active
+2026-11-16 18:14:31  batch 64 (8 pairs x 4 frames x 2), 148 steps/epoch, lr 0.0003 (warm-up 148 steps, cosine to 1e-06), wd 0, loss gend, aug light, paired, seed 0, workers 4
+2026-11-16 18:15:46  
+2026-11-16 18:15:46  ==== BENCH SUMMARY ====
+2026-11-16 18:15:46  vit_b16 batch 64 grad_ckpt False: 150 steps, 128.2 img/s, peak VRAM 4.28 GB (ok)
+2026-11-16 18:15:46  epoch estimate on 1186 reals: 1.2 min
+2026-11-16 18:15:46  free disk: 12.3 GB | recorded in C:\Projects\Deepfake detection\results\bench.csv
+2026-11-16 18:15:46  NEXT: paste this summary back.
+2026-11-16 18:15:46  =======================

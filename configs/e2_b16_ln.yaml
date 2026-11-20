@@ -1,7 +1,10 @@
-# E2: main development model. CLIP ViT-B/16, LayerNorm + head, paired batches, GenD loss, light aug.
+# E2 / B1: main development model on all training parts. CLIP ViT-B/16, LayerNorm + head, paired batches,
+# CE only (alignment and uniformity dropped after A7, 16 Nov), light aug until the Stage A augmentation rerun.
 arch: vit_b16
 aug: light
-loss: gend
-# Stage B (PLAN 9.4): 10 epochs, early stop after 4 without improvement
-epochs: 10
+loss: ce
+# lr 1e-4 from A7; replaced if the CE lr check (a7b_ce_lr3e-4) wins by at least 0.3 val_robust points
+lr: 1.0e-4
+# Stage B (owner, 16 Nov): 12 epochs, early stop after 4 without improvement
+epochs: 12
 patience: 4

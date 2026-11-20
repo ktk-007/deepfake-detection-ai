@@ -1,0 +1,12 @@
+2026-11-17 03:42:09  scoring runs\e1_linear_probe\best on part 08 views clean, tight, degraded, 16 frames per video (validation only; no test set is loaded)
+2026-11-17 03:44:47  e1_linear_probe best clean    : video AUC 0.7089, AP 0.9059, EER 0.3538 (277 real / 859 fake videos, 52 s)
+2026-11-17 03:44:47  e1_linear_probe best tight    : video AUC 0.6970, AP 0.9016, EER 0.3575 (277 real / 859 fake videos, 52 s)
+2026-11-17 03:44:47  e1_linear_probe best degraded : video AUC 0.7045, AP 0.9056, EER 0.3621 (277 real / 859 fake videos, 51 s)
+2026-11-17 03:44:47  e1_linear_probe best val_robust (mean of the three AUCs): 0.7035
+2026-11-17 03:44:47  results.csv row updated: C:\Projects\Deepfake detection\results\results.csv
+2026-11-17 03:44:47  
+2026-11-17 03:44:47  ==== EVAL_VAL SUMMARY ====
+2026-11-17 03:44:47  run e1_linear_probe, checkpoint best (epoch 2): clean 0.7089, tight 0.6970, degraded 0.7045 | val_robust 0.7035
+2026-11-17 03:44:47  time 2.6 min | free disk 21.1 GB | log C:\Projects\Deepfake detection\logs\eval_val_e1_linear_probe_20261117_034209.log
+2026-11-17 03:44:47  NEXT: paste this summary back.
+2026-11-17 03:44:47  ==========================

@@ -2,6 +2,9 @@
 arch: vit_b16
 linear_probe: true
 aug: light
+# CE only at lr 1e-4 (new Stage A reference A7, 16 Nov), so this run differs from A7 in one thing
+loss: ce
+lr: 1.0e-4
 # Stage A (PLAN 9.4, 10.1): development set, 8 epochs, no early stop
 parts: dev
 epochs: 8

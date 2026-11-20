@@ -1,0 +1,11 @@
+2026-11-16 13:54:45  train parts [0, 1, 2, 3]: 643 real videos, 2134 usable fakes | val part 08: 277 real / 859 fake videos, 9088 frames (8 per video)
+2026-11-16 13:54:45  model effb4 (first use downloads weights)
+2026-11-16 13:58:22  parameters: total 17,552,202, trainable 17,552,202 (100.000%)
+2026-11-16 13:58:22  batch 32 (4 pairs x 4 frames x 2), 160 steps/epoch, lr 0.0001 (warm-up 160 steps, cosine to 1e-06), wd 0.01, loss ce, aug light, paired, seed 0, workers 4
+2026-11-16 13:59:02  
+2026-11-16 13:59:02  ==== BENCH SUMMARY ====
+2026-11-16 13:59:02  effb4 batch 32 grad_ckpt False: 100 steps, 79.9 img/s, peak VRAM 3.74 GB (ok)
+2026-11-16 13:59:02  epoch estimate on 643 reals: 1.1 min
+2026-11-16 13:59:02  free disk: 3.4 GB | recorded in C:\Projects\Deepfake detection\results\bench.csv
+2026-11-16 13:59:02  NEXT: paste this summary back.
+2026-11-16 13:59:02  =======================

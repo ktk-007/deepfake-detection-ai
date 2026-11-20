@@ -1,0 +1,9 @@
+# A2 (E4a): A1 with the robust augmentation preset. Stage A: parts 00-05, 8 epochs, no early stop (PLAN 10.1).
+arch: vit_b16
+aug: robust
+loss: gend
+lr: 3.0e-4
+seed: 0
+parts: dev
+epochs: 8
+patience: 0

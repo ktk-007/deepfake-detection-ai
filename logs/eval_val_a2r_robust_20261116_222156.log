@@ -1,0 +1,12 @@
+2026-11-16 22:21:56  scoring runs\a2r_robust\best on part 08 views clean, tight, degraded, 16 frames per video (validation only; no test set is loaded)
+2026-11-16 22:24:32  a2r_robust best clean    : video AUC 0.8688, AP 0.9567, EER 0.2408 (277 real / 859 fake videos, 51 s)
+2026-11-16 22:24:32  a2r_robust best tight    : video AUC 0.8456, AP 0.9428, EER 0.2551 (277 real / 859 fake videos, 51 s)
+2026-11-16 22:24:32  a2r_robust best degraded : video AUC 0.8050, AP 0.9333, EER 0.2781 (277 real / 859 fake videos, 51 s)
+2026-11-16 22:24:32  a2r_robust best val_robust (mean of the three AUCs): 0.8398
+2026-11-16 22:24:32  results.csv row updated: C:\Projects\Deepfake detection\results\results.csv
+2026-11-16 22:24:32  
+2026-11-16 22:24:32  ==== EVAL_VAL SUMMARY ====
+2026-11-16 22:24:32  run a2r_robust, checkpoint best (epoch 8): clean 0.8688, tight 0.8456, degraded 0.8050 | val_robust 0.8398
+2026-11-16 22:24:32  time 2.6 min | free disk 36.6 GB | log C:\Projects\Deepfake detection\logs\eval_val_a2r_robust_20261116_222156.log
+2026-11-16 22:24:32  NEXT: paste this summary back.
+2026-11-16 22:24:32  ==========================

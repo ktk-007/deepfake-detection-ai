@@ -1,8 +1,11 @@
-# E7: final model. CLIP ViT-L/14, gradient checkpointing; aug and data choice filled in after E4a / E6.
+# E7 / B3: final model. CLIP ViT-L/14, gradient checkpointing, CE only, DFDC only.
+# aug and lr follow the Stage A decisions; batch stays 32 until the ViT-L/14 benchmark (batch 64 / 48).
 arch: vit_l14
 batch: 32
 grad_ckpt: true
 aug: light
-# Stage B (PLAN 9.4): 10 epochs, early stop after 4 without improvement
-epochs: 10
+loss: ce
+lr: 1.0e-4
+# Stage B (owner, 16 Nov): 12 epochs, early stop after 4 without improvement
+epochs: 12
 patience: 4

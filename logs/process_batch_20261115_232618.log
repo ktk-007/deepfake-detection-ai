@@ -1,0 +1,37 @@
+2026-11-15 23:26:18  zips found in "C:\Projects\Deepfake detection\zip data": dfdc_train_part_00.zip, dfdc_train_part_01.zip
+2026-11-15 23:26:18  parts already done: none | free disk 20.6 GB
+2026-11-15 23:26:18  part 00: pre-flight ok, about 106 MB of crops expected, free disk 20.6 GB
+2026-11-15 23:26:23  part 00: extracting, frames=16 max_fakes=5 max_tries=10 margin=0.3 size=224 jpeg_q=95 threshold=2.5 seed=0
+2026-11-15 23:26:23  part 00: 86 reals, 1248 fakes with original in part; 2 groups, about 10 videos planned
+2026-11-15 23:26:28  part 00: G1 FAIL: 2/86 reals have a row; missing e.g. ['apvzjkvnwn.mp4', 'chqqxfuuzi.mp4', 'ddtbarpcgo.mp4']
+2026-11-15 23:26:28  part 00: G2 PASS: reals ok 2/2 = 100.0% (need >= 95%)
+2026-11-15 23:26:28  part 00: G3 PASS: flagged 0/8 = 0.0% (max 20%, warn > 10%)
+2026-11-15 23:26:28  part 00: G4 PASS: 10/10 ok videos have n_frames JPEGs
+2026-11-15 23:26:28  part 00: G5 PASS: 160/160 random JPEGs decode at 224x224
+2026-11-15 23:26:28  part 00: G6 PASS: metadata.json ok, _samples.jpg ok
+2026-11-15 23:26:28  part 00: G7 PASS: read errors 0/10 = 0.00% (need < 1%)
+2026-11-15 23:26:28  part 00: fake score min/10/25/50/75/90th pct: 2.85 / 3.67 / 4.19 / 5.69 / 10.65 / 10.89
+2026-11-15 23:26:28  part 00: 10 videos read in 0.1 min
+2026-11-15 23:26:28  part 00: trial run (--limit-groups), DONE.json not written
+2026-11-15 23:26:28  part 01: pre-flight ok, about 127 MB of crops expected, free disk 20.6 GB
+2026-11-15 23:26:28  part 01: extracting, frames=16 max_fakes=5 max_tries=10 margin=0.3 size=224 jpeg_q=95 threshold=2.5 seed=0
+2026-11-15 23:26:28  part 01: 108 reals, 1591 fakes with original in part; 2 groups, about 12 videos planned
+2026-11-15 23:26:33  part 01: G1 FAIL: 2/108 reals have a row; missing e.g. ['bkuzquigyt.mp4', 'blkbkvcffn.mp4', 'blszgmxkvu.mp4']
+2026-11-15 23:26:33  part 01: G2 PASS: reals ok 2/2 = 100.0% (need >= 95%)
+2026-11-15 23:26:33  part 01: G3 PASS: flagged 0/10 = 0.0% (max 20%, warn > 10%)
+2026-11-15 23:26:33  part 01: G4 PASS: 12/12 ok videos have n_frames JPEGs
+2026-11-15 23:26:33  part 01: G5 PASS: 192/192 random JPEGs decode at 224x224
+2026-11-15 23:26:33  part 01: G6 PASS: metadata.json ok, _samples.jpg ok
+2026-11-15 23:26:33  part 01: G7 PASS: read errors 0/12 = 0.00% (need < 1%)
+2026-11-15 23:26:33  part 01: fake score min/10/25/50/75/90th pct: 8.52 / 9.01 / 9.85 / 11.98 / 13.26 / 13.83
+2026-11-15 23:26:33  part 01: 12 videos read in 0.1 min
+2026-11-15 23:26:33  part 01: trial run (--limit-groups), DONE.json not written
+2026-11-15 23:26:33  
+2026-11-15 23:26:33  ==== BATCH SUMMARY ====
+2026-11-15 23:26:33  part 00: reals ok 2/2, usable fakes 8, flagged 0.0% (0), crops 2 MB, gates not run
+2026-11-15 23:26:33  part 01: reals ok 2/2, usable fakes 10, flagged 0.0% (0), crops 2 MB, gates not run
+2026-11-15 23:26:33  zips deleted: kept, smoke test not passed yet
+2026-11-15 23:26:33  crops total: 0.00 GB | free disk: 20.7 GB | time 0.2 min
+2026-11-15 23:26:33  NEXT: trial run only. Run again without --limit-groups.
+2026-11-15 23:26:33  log: C:\Projects\Deepfake detection\logs\process_batch_20261115_232618.log
+2026-11-15 23:26:33  =======================

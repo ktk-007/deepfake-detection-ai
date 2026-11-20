@@ -1,0 +1,10 @@
+# A7 (E4d): CE only (no alignment / uniformity terms), lr 1e-4 (owner, 16 Nov), so it differs from A4 in the
+# loss only. Stage A: parts 00-05, light aug, 8 epochs, no early stop (PLAN 10.1).
+arch: vit_b16
+aug: light
+loss: ce
+lr: 1.0e-4
+seed: 0
+parts: dev
+epochs: 8
+patience: 0

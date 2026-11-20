@@ -1,0 +1,17 @@
+2026-11-15 23:24:14  part 00: dfdc_train_part_00.zip, 11.52 GB, 1334 mp4 in zip
+2026-11-15 23:24:14    metadata: 1334 videos, real 86 (6.4%), fake 1248 (93.6%)
+2026-11-15 23:24:14    pairing: 1248 fakes have their original in this part; orphans 0, fakes missing from zip 0, reals missing from zip 0
+2026-11-15 23:24:14    fakes per real: min 1, max 36, mean 14.5; reals with no fake 0
+2026-11-15 23:24:14    plan: 16 frames, up to 5 usable fakes per real -> about 479 videos, about 106 MB of crops (estimate)
+2026-11-15 23:24:14  part 01: dfdc_train_part_01.zip, 9.41 GB, 1699 mp4 in zip
+2026-11-15 23:24:14    metadata: 1699 videos, real 108 (6.4%), fake 1591 (93.6%)
+2026-11-15 23:24:14    pairing: 1591 fakes have their original in this part; orphans 0, fakes missing from zip 0, reals missing from zip 0
+2026-11-15 23:24:14    fakes per real: min 1, max 35, mean 14.7; reals with no fake 0
+2026-11-15 23:24:14    plan: 16 frames, up to 5 usable fakes per real -> about 575 videos, about 127 MB of crops (estimate)
+2026-11-15 23:24:14  
+2026-11-15 23:24:14  ==== ZIP SUMMARY ====
+2026-11-15 23:24:14  part 00: reals 86, fakes 1248, planned videos 479, crops about 106 MB
+2026-11-15 23:24:14  part 01: reals 108, fakes 1591, planned videos 575, crops about 127 MB
+2026-11-15 23:24:14  crops total about 0.23 GB | free disk 19.9 GB
+2026-11-15 23:24:14  log: C:\Projects\Deepfake detection\logs\inspect_zip_20261115_232414.log
+2026-11-15 23:24:14  =====================

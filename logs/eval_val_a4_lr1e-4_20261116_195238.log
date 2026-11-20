@@ -1,0 +1,12 @@
+2026-11-16 19:52:38  scoring runs\a4_lr1e-4\best on part 08 views clean, tight, degraded, 16 frames per video (validation only; no test set is loaded)
+2026-11-16 19:55:14  a4_lr1e-4 best clean    : video AUC 0.7555, AP 0.9194, EER 0.2953 (277 real / 859 fake videos, 51 s)
+2026-11-16 19:55:14  a4_lr1e-4 best tight    : video AUC 0.7529, AP 0.9193, EER 0.3083 (277 real / 859 fake videos, 51 s)
+2026-11-16 19:55:14  a4_lr1e-4 best degraded : video AUC 0.6844, AP 0.8902, EER 0.3710 (277 real / 859 fake videos, 51 s)
+2026-11-16 19:55:14  a4_lr1e-4 best val_robust (mean of the three AUCs): 0.7309
+2026-11-16 19:55:14  results.csv row updated: C:\Projects\Deepfake detection\results\results.csv
+2026-11-16 19:55:14  
+2026-11-16 19:55:14  ==== EVAL_VAL SUMMARY ====
+2026-11-16 19:55:14  run a4_lr1e-4, checkpoint best (epoch 1): clean 0.7555, tight 0.7529, degraded 0.6844 | val_robust 0.7309
+2026-11-16 19:55:14  time 2.6 min | free disk 35.3 GB | log C:\Projects\Deepfake detection\logs\eval_val_a4_lr1e-4_20261116_195238.log
+2026-11-16 19:55:14  NEXT: paste this summary back.
+2026-11-16 19:55:14  ==========================

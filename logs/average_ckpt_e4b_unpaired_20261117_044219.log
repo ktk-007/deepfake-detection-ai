@@ -1,0 +1,12 @@
+2026-11-17 04:42:19  e4b_unpaired: averaged epochs [6, 7, 8] -> C:\Projects\Deepfake detection\runs\e4b_unpaired\avg.pt
+2026-11-17 04:44:55  e4b_unpaired avg clean    : video AUC 0.8341, AP 0.9449, EER 0.2675 (277 real / 859 fake videos, 51 s)
+2026-11-17 04:44:55  e4b_unpaired avg tight    : video AUC 0.8153, AP 0.9264, EER 0.3071 (277 real / 859 fake videos, 51 s)
+2026-11-17 04:44:55  e4b_unpaired avg degraded : video AUC 0.7762, AP 0.9189, EER 0.2953 (277 real / 859 fake videos, 51 s)
+2026-11-17 04:44:55  e4b_unpaired avg val_robust (mean of the three AUCs): 0.8086
+2026-11-17 04:44:55  
+2026-11-17 04:44:55  ==== AVERAGE_CKPT SUMMARY ====
+2026-11-17 04:44:55  run e4b_unpaired: epochs [6, 7, 8] averaged | val_robust best.pt 0.8097, avg.pt 0.8086 (gain -0.11 points, needs 0.3)
+2026-11-17 04:44:55  decision: use best.pt | results.csv row updated
+2026-11-17 04:44:55  time 2.6 min | free disk 32.1 GB | log C:\Projects\Deepfake detection\logs\average_ckpt_e4b_unpaired_20261117_044219.log
+2026-11-17 04:44:55  NEXT: paste this summary back.
+2026-11-17 04:44:55  ==============================

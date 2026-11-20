@@ -1,0 +1,12 @@
+2026-11-16 19:55:18  a4_lr1e-4: averaged epochs [2, 3, 4] -> C:\Projects\Deepfake detection\runs\a4_lr1e-4\avg.pt
+2026-11-16 19:57:55  a4_lr1e-4 avg clean    : video AUC 0.7426, AP 0.9154, EER 0.3178 (277 real / 859 fake videos, 51 s)
+2026-11-16 19:57:55  a4_lr1e-4 avg tight    : video AUC 0.7326, AP 0.9113, EER 0.3148 (277 real / 859 fake videos, 51 s)
+2026-11-16 19:57:55  a4_lr1e-4 avg degraded : video AUC 0.6515, AP 0.8775, EER 0.3894 (277 real / 859 fake videos, 52 s)
+2026-11-16 19:57:55  a4_lr1e-4 avg val_robust (mean of the three AUCs): 0.7089
+2026-11-16 19:57:55  
+2026-11-16 19:57:55  ==== AVERAGE_CKPT SUMMARY ====
+2026-11-16 19:57:55  run a4_lr1e-4: epochs [2, 3, 4] averaged | val_robust best.pt 0.7309, avg.pt 0.7089 (gain -2.20 points, needs 0.3)
+2026-11-16 19:57:55  decision: use best.pt | results.csv row updated
+2026-11-16 19:57:55  time 2.6 min | free disk 35.4 GB | log C:\Projects\Deepfake detection\logs\average_ckpt_a4_lr1e-4_20261116_195518.log
+2026-11-16 19:57:55  NEXT: paste this summary back.
+2026-11-16 19:57:55  ==============================

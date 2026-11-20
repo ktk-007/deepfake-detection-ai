@@ -1,0 +1,20 @@
+2026-11-16 12:36:07  source: C:\Projects\Deepfake detection\data\test\wilddeepfake\deepfake_in_the_wild | tars: 157 (115 fake, 42 real)
+2026-11-16 12:36:07  settings: frames=32 size=224 jpeg_q=95 short_below=8
+2026-11-16 12:36:07  free disk 41.5 GB, about 327 MB of crops expected
+2026-11-16 12:37:13  stage: sample sheet and gates
+2026-11-16 12:37:14  W1 PASS: 157/157 tars opened and yielded clips
+2026-11-16 12:37:14  W2 PASS: members read 25792/25792 = 100.00% (need >= 99%)
+2026-11-16 12:37:14  W3 PASS: 806/806 clips have n_frames JPEGs
+2026-11-16 12:37:14  W4 PASS: 200/200 random JPEGs decode at 224x224
+2026-11-16 12:37:14  W5 PASS: _samples.jpg (8 real, 8 fake clips) ok
+2026-11-16 12:37:15  
+2026-11-16 12:37:15  ==== WILDDEEPFAKE SUMMARY ====
+2026-11-16 12:37:15  real: 396 clips from 42 tars (ok 396, short 0, error 0), 12672 frames saved; source frames per clip min 51 / median 86 / max 3655
+2026-11-16 12:37:15  fake: 410 clips from 115 tars (ok 410, short 0, error 0), 13120 frames saved; source frames per clip min 52 / median 144 / max 3418
+2026-11-16 12:37:15  members listed 165662 PNG (0 skipped), selected 25792, read ok 25792 | crop size 224x224 JPEG 95
+2026-11-16 12:37:15  gates: PASS
+2026-11-16 12:37:15  DONE.json written. Tar files kept (ask before deleting, about 9.9 GB).
+2026-11-16 12:37:16  crops: 264 MB in C:\Projects\Deepfake detection\data\crops\wild_test | free disk: 40.5 GB | time 1.2 min
+2026-11-16 12:37:16  NEXT: open data\crops\wild_test\_samples.jpg, paste this summary back; then decide on deleting the tars.
+2026-11-16 12:37:16  log: C:\Projects\Deepfake detection\logs\prepare_wild_20261116_123607.log
+2026-11-16 12:37:16  ==============================

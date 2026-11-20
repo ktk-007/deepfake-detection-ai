@@ -1,0 +1,6 @@
+2026-11-15 23:41:07  temp split written: C:\Projects\Deepfake detection\data\splits\temp_val.json
+2026-11-15 23:41:07  groups: train 155, val 39 (grouped by original video) | val videos: 39 real, 169 fake
+2026-11-15 23:41:07  loading CLIP ViT-B/16 (OpenAI weights; the first run downloads about 0.6 GB)
+2026-11-15 23:41:37  parameters: total 85,800,962, trainable 41,474 (0.048%)
+2026-11-15 23:43:30  trained 150 steps (8 sampler epochs) in 113 s, 85.0 img/s, batch 64, peak VRAM 4.28 GB
+2026-11-15 23:43:30  validating on 3328 frames

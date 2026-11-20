@@ -1,0 +1,36 @@
+2026-11-17 00:02:32  queue configs\queue_finals.yaml: 6 runs, freeze 2026-11-17 05:00 (no run starts at or after it; the run in progress stops after its current epoch)
+2026-11-17 00:02:32  [1/6] e2_b16: start 00:02, free disk 35.6 GB
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\train.py" --name e2_b16 --config configs/e2_b16_ln.yaml --lr 0.0003 --aug light --freeze "2026-11-17 05:00"
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\eval_val.py" --run e2_b16
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\average_ckpt.py" --run e2_b16
+2026-11-17 00:02:32  [2/6] e7_l14: start 00:02, free disk 35.6 GB
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\train.py" --name e7_l14 --config configs/e7_l14.yaml --epochs 4 --lr 0.0002 --aug light --freeze "2026-11-17 05:00"
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\eval_val.py" --run e7_l14
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\average_ckpt.py" --run e7_l14
+2026-11-17 00:02:32  [3/6] e1_linear_probe: start 00:02, free disk 35.6 GB
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\train.py" --name e1_linear_probe --config configs/e1_linear_probe.yaml --freeze "2026-11-17 05:00"
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\eval_val.py" --run e1_linear_probe
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\average_ckpt.py" --run e1_linear_probe
+2026-11-17 00:02:32  [4/6] e3_effb4: start 00:02, free disk 35.6 GB
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\train.py" --name e3_effb4 --config configs/e3_effb4.yaml --epochs 6 --freeze "2026-11-17 05:00"
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\eval_val.py" --run e3_effb4
+2026-11-17 00:02:32  [5/6] e4b_unpaired: start 00:02, free disk 35.6 GB
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\train.py" --name e4b_unpaired --config configs/e4b_unpaired.yaml --freeze "2026-11-17 05:00"
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\eval_val.py" --run e4b_unpaired
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\average_ckpt.py" --run e4b_unpaired
+2026-11-17 00:02:32  [6/6] e4c_with_flagged: start 00:02, free disk 35.6 GB
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\train.py" --name e4c_with_flagged --config configs/e4c_with_flagged.yaml --freeze "2026-11-17 05:00"
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\eval_val.py" --run e4c_with_flagged
+2026-11-17 00:02:32    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\average_ckpt.py" --run e4c_with_flagged
+2026-11-17 00:02:32  
+2026-11-17 00:02:32  ==== QUEUE SUMMARY ====
+2026-11-17 00:02:32  freeze 2026-11-17 05:00 | ended 2026-11-17 00:02 | 0.0 h
+2026-11-17 00:02:32  e2_b16: dry run
+2026-11-17 00:02:32  e7_l14: dry run
+2026-11-17 00:02:32  e1_linear_probe: dry run
+2026-11-17 00:02:32  e3_effb4: dry run
+2026-11-17 00:02:32  e4b_unpaired: dry run
+2026-11-17 00:02:32  e4c_with_flagged: dry run
+2026-11-17 00:02:32  free disk 35.6 GB | log C:\Projects\Deepfake detection\logs\run_queue_20261117_000232.log
+2026-11-17 00:02:32  NEXT: paste this summary back.
+2026-11-17 00:02:32  =======================

@@ -1,0 +1,12 @@
+2026-11-17 03:12:00  scoring runs\e7_l14\best on part 08 views clean, tight, degraded, 16 frames per video (validation only; no test set is loaded)
+2026-11-17 03:21:59  e7_l14 best clean    : video AUC 0.9900, AP 0.9970, EER 0.0426 (277 real / 859 fake videos, 197 s)
+2026-11-17 03:21:59  e7_l14 best tight    : video AUC 0.9901, AP 0.9970, EER 0.0402 (277 real / 859 fake videos, 197 s)
+2026-11-17 03:21:59  e7_l14 best degraded : video AUC 0.9614, AP 0.9874, EER 0.1130 (277 real / 859 fake videos, 197 s)
+2026-11-17 03:21:59  e7_l14 best val_robust (mean of the three AUCs): 0.9805
+2026-11-17 03:21:59  results.csv row updated: C:\Projects\Deepfake detection\results\results.csv
+2026-11-17 03:21:59  
+2026-11-17 03:21:59  ==== EVAL_VAL SUMMARY ====
+2026-11-17 03:21:59  run e7_l14, checkpoint best (epoch 3): clean 0.9900, tight 0.9901, degraded 0.9614 | val_robust 0.9805
+2026-11-17 03:21:59  time 10.0 min | free disk 31.6 GB | log C:\Projects\Deepfake detection\logs\eval_val_e7_l14_20261117_031200.log
+2026-11-17 03:21:59  NEXT: paste this summary back.
+2026-11-17 03:21:59  ==========================

@@ -1,0 +1,10 @@
+# A2r (E4a rerun): A7b with the robust augmentation preset. CE only, lr 3e-4 (chosen by A7b vs A7, 16 Nov).
+# Stage A: parts 00-05, 8 epochs, no early stop (PLAN 10.1).
+arch: vit_b16
+aug: robust
+loss: ce
+lr: 3.0e-4
+seed: 0
+parts: dev
+epochs: 8
+patience: 0

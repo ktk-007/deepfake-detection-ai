@@ -1,0 +1,37 @@
+2026-11-16 20:34:42  zips found in "C:\Projects\Deepfake detection\zip data": dfdc_train_part_16.zip, dfdc_train_part_17.zip
+2026-11-16 20:34:42  parts already done: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] | free disk 21.0 GB
+2026-11-16 20:34:42  part 16: pre-flight ok, about 329 MB of crops expected, free disk 21.0 GB
+2026-11-16 20:34:47  part 16: extracting, frames=16 max_fakes=5 max_tries=10 margin=0.3 size=224 jpeg_q=95 threshold=2.5 seed=0
+2026-11-16 20:34:47  part 16: 365 reals, 1696 fakes with original in part; 365 groups, about 1484 videos planned
+2026-11-16 20:43:30  part 16: G1 PASS: 365/365 reals have a row
+2026-11-16 20:43:30  part 16: G2 PASS: reals ok 365/365 = 100.0% (need >= 95%)
+2026-11-16 20:43:30  part 16: G3 PASS: flagged 10/1122 = 0.9% (max 20%, warn > 10%)
+2026-11-16 20:43:30  part 16: G4 PASS: 1487/1487 ok videos have n_frames JPEGs
+2026-11-16 20:43:30  part 16: G5 PASS: 200/200 random JPEGs decode at 224x224
+2026-11-16 20:43:30  part 16: G6 PASS: metadata.json ok, _samples.jpg ok
+2026-11-16 20:43:30  part 16: G7 PASS: read errors 0/1487 = 0.00% (need < 1%)
+2026-11-16 20:43:30  part 16: fake score min/10/25/50/75/90th pct: 1.94 / 6.93 / 9.86 / 13.43 / 17.75 / 22.48
+2026-11-16 20:43:30  part 16: 1487 videos read in 8.7 min
+2026-11-16 20:43:36  part 17: pre-flight ok, about 412 MB of crops expected, free disk 20.6 GB
+2026-11-16 20:43:36  part 17: extracting, frames=16 max_fakes=5 max_tries=10 margin=0.3 size=224 jpeg_q=95 threshold=2.5 seed=0
+2026-11-16 20:43:36  part 17: 421 reals, 2009 fakes with original in part; 421 groups, about 1860 videos planned
+2026-11-16 20:53:38  part 17: G1 PASS: 421/421 reals have a row
+2026-11-16 20:53:38  part 17: G2 PASS: reals ok 421/421 = 100.0% (need >= 95%)
+2026-11-16 20:53:38  part 17: G3 PASS: flagged 20/1447 = 1.4% (max 20%, warn > 10%)
+2026-11-16 20:53:38  part 17: G4 PASS: 1868/1868 ok videos have n_frames JPEGs
+2026-11-16 20:53:38  part 17: G5 PASS: 200/200 random JPEGs decode at 224x224
+2026-11-16 20:53:38  part 17: G6 PASS: metadata.json ok, _samples.jpg ok
+2026-11-16 20:53:38  part 17: G7 PASS: read errors 0/1868 = 0.00% (need < 1%)
+2026-11-16 20:53:38  part 17: fake score min/10/25/50/75/90th pct: 1.95 / 8.16 / 10.84 / 15.63 / 22.89 / 29.43
+2026-11-16 20:53:38  part 17: 1868 videos read in 10.0 min
+2026-11-16 20:53:43  deleted dfdc_train_part_16.zip (9.43 GB)
+2026-11-16 20:53:43  deleted dfdc_train_part_17.zip (9.44 GB)
+2026-11-16 20:54:39  
+2026-11-16 20:54:39  ==== BATCH SUMMARY ====
+2026-11-16 20:54:39  part 16: reals ok 365/365, usable fakes 1112, flagged 0.9% (10), crops 280 MB, gates PASS
+2026-11-16 20:54:39  part 17: reals ok 421/421, usable fakes 1427, flagged 1.4% (20), crops 349 MB, gates PASS
+2026-11-16 20:54:39  zips deleted: dfdc_train_part_16.zip (9.43 GB), dfdc_train_part_17.zip (9.44 GB)
+2026-11-16 20:54:39  crops total: 5.11 GB | free disk: 38.8 GB | time 20.0 min
+2026-11-16 20:54:39  NEXT: download dfdc_train_part_18.zip into "zip data\" (one zip at a time, start only with >= 16 GB free), then run: python scripts\process_batch.py
+2026-11-16 20:54:39  log: C:\Projects\Deepfake detection\logs\process_batch_20261116_203442.log
+2026-11-16 20:54:39  =======================

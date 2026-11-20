@@ -1,0 +1,21 @@
+2026-11-17 06:42:38  device cuda; models: CLIP ViT-L/14, CLIP ViT-B/16 (faster), EfficientNet-B4, Ensemble (Most accurate)
+2026-11-17 06:42:51  [vit_l14] enyfzkpdeq (real): Likely Real Medium score 0.181 | 1.8 s
+2026-11-17 06:42:53  [vit_l14] eyfqtmmjhg (fake): Likely Fake High score 0.9928 | 1.6 s
+2026-11-17 06:42:54  [vit_l14] lbqrludiqd (fake): Likely Fake High score 0.9854 | 1.6 s
+2026-11-17 06:42:56  [vit_l14] yirkaxfwgb (real): Likely Real Medium score 0.169 | 1.6 s
+2026-11-17 06:42:58  [vit_l14] lwasdlhiiv (fake): Likely Fake High score 0.8834 | 1.6 s
+2026-11-17 06:42:59  [vit_l14] id45_0003 (real): Likely Real High score 0.0513 | 1.7 s
+2026-11-17 06:43:01  [vit_l14] id48_id41_0001 (fake): Inconclusive  score 0.2713 | 2.2 s
+2026-11-17 06:43:05  [ensemble] enyfzkpdeq (real): Likely Real High score 0.1031 | 1.7 s
+2026-11-17 06:43:07  [ensemble] eyfqtmmjhg (fake): Likely Fake High score 0.9962 | 1.7 s
+2026-11-17 06:43:09  [ensemble] lbqrludiqd (fake): Likely Fake High score 0.9905 | 1.7 s
+2026-11-17 06:43:10  [ensemble] yirkaxfwgb (real): Likely Real High score 0.1095 | 1.7 s
+2026-11-17 06:43:12  [ensemble] lwasdlhiiv (fake): Likely Fake High score 0.8056 | 1.7 s
+2026-11-17 06:43:14  [ensemble] id45_0003 (real): Likely Real High score 0.0275 | 1.7 s
+2026-11-17 06:43:16  [ensemble] id48_id41_0001 (fake): Likely Real Medium score 0.2591 | 2.1 s
+2026-11-17 06:43:16  
+2026-11-17 06:43:16  ==== APP CHECK SUMMARY ====
+2026-11-17 06:43:16  CLIP ViT-L/14: 6/7 verdicts match the truth (Inconclusive counts as not matching) | slowest 2.2 s | all under 20 s: True
+2026-11-17 06:43:16  Ensemble (Most accurate): 6/7 verdicts match the truth (Inconclusive counts as not matching) | slowest 2.1 s | all under 20 s: True
+2026-11-17 06:43:16  reports in C:\Projects\Deepfake detection\results\app_reports | log C:\Projects\Deepfake detection\logs\app_check_20261117_064238.log
+2026-11-17 06:43:16  ===========================

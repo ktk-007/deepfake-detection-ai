@@ -1,0 +1,10 @@
+# A7b (learning rate under the CE-only loss): A7 with lr 3e-4. Stage A: parts 00-05, light aug, 8 epochs,
+# no early stop. Kept only if its val_robust beats A7 (0.8422) by at least 0.3 points (PLAN 9.5).
+arch: vit_b16
+aug: light
+loss: ce
+lr: 3.0e-4
+seed: 0
+parts: dev
+epochs: 8
+patience: 0

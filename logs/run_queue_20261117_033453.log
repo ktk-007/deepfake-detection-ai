@@ -1,0 +1,34 @@
+2026-11-17 03:34:53  queue configs\queue_finals.yaml: 6 runs, freeze 2026-11-17 05:00 (no run starts at or after it; the run in progress stops after its current epoch)
+2026-11-17 03:34:53  [1/6] e2_b16: already finished, skipped
+2026-11-17 03:34:53  [2/6] e7_l14: already finished, skipped
+2026-11-17 03:34:53  [3/6] e1_linear_probe: start 03:34, free disk 32.7 GB
+2026-11-17 03:34:53    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\train.py" --name e1_linear_probe --config configs/e1_linear_probe.yaml --freeze "2026-11-17 05:00"
+2026-11-17 03:34:53    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\eval_val.py" --run e1_linear_probe
+2026-11-17 03:34:53    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\average_ckpt.py" --run e1_linear_probe
+2026-11-17 03:47:29  [3/6] e1_linear_probe: done in 13 min: epochs 8, best epoch 2, part-08 AUC 0.70566, val_robust 0.70349, averaged used False
+2026-11-17 03:47:29  [4/6] e3_effb4: start 03:47, free disk 32.9 GB
+2026-11-17 03:47:29    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\train.py" --name e3_effb4 --config configs/e3_effb4.yaml --epochs 6 --freeze "2026-11-17 05:00"
+2026-11-17 03:47:29    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\eval_val.py" --run e3_effb4
+2026-11-17 04:27:13  [4/6] e3_effb4: done in 40 min: epochs 6, best epoch 4, part-08 AUC 0.98178, val_robust 0.97530, averaged used -
+2026-11-17 04:27:13  [5/6] e4b_unpaired: start 04:27, free disk 31.8 GB
+2026-11-17 04:27:13    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\train.py" --name e4b_unpaired --config configs/e4b_unpaired.yaml --freeze "2026-11-17 05:00"
+2026-11-17 04:27:13    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\eval_val.py" --run e4b_unpaired
+2026-11-17 04:27:13    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\average_ckpt.py" --run e4b_unpaired
+2026-11-17 04:44:56  [5/6] e4b_unpaired: done in 18 min: epochs 8, best epoch 8, part-08 AUC 0.83228, val_robust 0.80969, averaged used False
+2026-11-17 04:44:56  [6/6] e4c_with_flagged: start 04:44, free disk 32.1 GB
+2026-11-17 04:44:56    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\train.py" --name e4c_with_flagged --config configs/e4c_with_flagged.yaml --freeze "2026-11-17 05:00"
+2026-11-17 04:44:56    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\eval_val.py" --run e4c_with_flagged
+2026-11-17 04:44:56    "C:\Projects\Deepfake detection\.venv\Scripts\python.exe" "C:\Projects\Deepfake detection\scripts\average_ckpt.py" --run e4c_with_flagged
+2026-11-17 05:02:24  [6/6] e4c_with_flagged: done in 17 min: epochs 8, best epoch 8, part-08 AUC 0.87913, val_robust 0.84789, averaged used False
+2026-11-17 05:02:24  
+2026-11-17 05:02:24  ==== QUEUE SUMMARY ====
+2026-11-17 05:02:24  freeze 2026-11-17 05:00 | ended 2026-11-17 05:02 | 1.5 h
+2026-11-17 05:02:24  e2_b16: already finished, skipped
+2026-11-17 05:02:24  e7_l14: already finished, skipped
+2026-11-17 05:02:24  e1_linear_probe: done in 13 min: epochs 8, best epoch 2, part-08 AUC 0.70566, val_robust 0.70349, averaged used False
+2026-11-17 05:02:24  e3_effb4: done in 40 min: epochs 6, best epoch 4, part-08 AUC 0.98178, val_robust 0.97530, averaged used -
+2026-11-17 05:02:24  e4b_unpaired: done in 18 min: epochs 8, best epoch 8, part-08 AUC 0.83228, val_robust 0.80969, averaged used False
+2026-11-17 05:02:24  e4c_with_flagged: done in 17 min: epochs 8, best epoch 8, part-08 AUC 0.87913, val_robust 0.84789, averaged used False
+2026-11-17 05:02:24  free disk 32.0 GB | log C:\Projects\Deepfake detection\logs\run_queue_20261117_033453.log
+2026-11-17 05:02:24  NEXT: paste this summary back.
+2026-11-17 05:02:24  =======================

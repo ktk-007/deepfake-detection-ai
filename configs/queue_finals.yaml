@@ -1,0 +1,28 @@
+# Night queue (PLAN 10.2, 10.3). Owner's evaluation: 17 Nov 09:30. Phase 4, the app checks and the deliverables
+# need about 4 hours after the freeze, so the freeze is 05:00 (4.5 h before the evaluation).
+# Order (owner, 16 Nov): B1, E7, E1, E3, then report-only runs if time is left.
+# `set` overrides the config (Stage A decisions and epoch counts sized to the window); see the estimates per run.
+# The aug values for e7_l14 and e2_b16 are set after A3r and A2h (light = A7b until then).
+freeze: "2026-11-17 05:00"
+runs:
+  # B1 / E2: ViT-B/16 on all parts, 12 epochs with early stop after 4, about 6 min per epoch -> at most 75 min.
+  - name: e2_b16
+    config: configs/e2_b16_ln.yaml
+    set: {lr: 3.0e-4, aug: light}
+  # B3 / E7: ViT-L/14, about 31 min per epoch on all parts (27 img/s) -> 4 epochs about 2 h 20 min with checks.
+  # lr 2e-4: A7b's 3e-4 at batch 64, scaled by sqrt(32/64) for batch 32 (untested on ViT-L/14).
+  - name: e7_l14
+    config: configs/e7_l14.yaml
+    set: {epochs: 4, lr: 2.0e-4, aug: light}
+  # E1: linear probe on parts 00-05, 8 epochs, about 15 min (final table row, development set).
+  - name: e1_linear_probe
+    config: configs/e1_linear_probe.yaml
+  # B4 / E3: EfficientNet-B4, about 10 min per epoch on all parts -> 6 epochs about 65 min.
+  - name: e3_effb4
+    config: configs/e3_effb4.yaml
+    set: {epochs: 6}
+  # Below: run only if time is left before the freeze; otherwise listed as planned, not run.
+  - name: e4b_unpaired
+    config: configs/e4b_unpaired.yaml
+  - name: e4c_with_flagged
+    config: configs/e4c_with_flagged.yaml

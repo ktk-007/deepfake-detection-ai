@@ -1,0 +1,12 @@
+2026-11-17 04:57:06  scoring runs\e4c_with_flagged\best on part 08 views clean, tight, degraded, 16 frames per video (validation only; no test set is loaded)
+2026-11-17 04:59:43  e4c_with_flagged best clean    : video AUC 0.8813, AP 0.9618, EER 0.2172 (277 real / 859 fake videos, 51 s)
+2026-11-17 04:59:43  e4c_with_flagged best tight    : video AUC 0.8552, AP 0.9454, EER 0.2527 (277 real / 859 fake videos, 51 s)
+2026-11-17 04:59:43  e4c_with_flagged best degraded : video AUC 0.8071, AP 0.9332, EER 0.2728 (277 real / 859 fake videos, 51 s)
+2026-11-17 04:59:43  e4c_with_flagged best val_robust (mean of the three AUCs): 0.8479
+2026-11-17 04:59:43  results.csv row updated: C:\Projects\Deepfake detection\results\results.csv
+2026-11-17 04:59:43  
+2026-11-17 04:59:43  ==== EVAL_VAL SUMMARY ====
+2026-11-17 04:59:43  run e4c_with_flagged, checkpoint best (epoch 8): clean 0.8813, tight 0.8552, degraded 0.8071 | val_robust 0.8479
+2026-11-17 04:59:43  time 2.6 min | free disk 32.0 GB | log C:\Projects\Deepfake detection\logs\eval_val_e4c_with_flagged_20261117_045706.log
+2026-11-17 04:59:43  NEXT: paste this summary back.
+2026-11-17 04:59:43  ==========================

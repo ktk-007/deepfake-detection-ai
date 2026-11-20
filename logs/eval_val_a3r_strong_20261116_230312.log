@@ -1,0 +1,12 @@
+2026-11-16 23:03:12  scoring runs\a3r_strong\best on part 08 views clean, tight, degraded, 16 frames per video (validation only; no test set is loaded)
+2026-11-16 23:05:51  a3r_strong best clean    : video AUC 0.8909, AP 0.9647, EER 0.2154 (277 real / 859 fake videos, 51 s)
+2026-11-16 23:05:51  a3r_strong best tight    : video AUC 0.8630, AP 0.9504, EER 0.2532 (277 real / 859 fake videos, 51 s)
+2026-11-16 23:05:51  a3r_strong best degraded : video AUC 0.8112, AP 0.9366, EER 0.2663 (277 real / 859 fake videos, 51 s)
+2026-11-16 23:05:51  a3r_strong best val_robust (mean of the three AUCs): 0.8550
+2026-11-16 23:05:51  results.csv row updated: C:\Projects\Deepfake detection\results\results.csv
+2026-11-16 23:05:51  
+2026-11-16 23:05:51  ==== EVAL_VAL SUMMARY ====
+2026-11-16 23:05:51  run a3r_strong, checkpoint best (epoch 5): clean 0.8909, tight 0.8630, degraded 0.8112 | val_robust 0.8550
+2026-11-16 23:05:51  time 2.6 min | free disk 35.3 GB | log C:\Projects\Deepfake detection\logs\eval_val_a3r_strong_20261116_230312.log
+2026-11-16 23:05:51  NEXT: paste this summary back.
+2026-11-16 23:05:51  ==========================

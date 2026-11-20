@@ -142,10 +142,34 @@ def test_app_holdout_group_excluded_from_training(tmp_path, crops):
     assert cfg["holdout_excluded"] == ["01/p1r3.mp4"] and cfg["train_reals"] == 15
 
 
+def test_several_holdout_groups_excluded_with_all_fakes(tmp_path, crops):
+    h = tmp_path / "hold.json"
+    h.write_text(json.dumps({"groups": [
+        {"part": 0, "real": "p0r2.mp4", "fakes_of_real": ["p0r2f0.mp4", "p0r2f1.mp4"]},
+        {"part": 1, "real": "p1r5.mp4", "demo": ["p1r5.mp4", "p1r5f0.mp4", "p1r5f1.mp4"]},
+        {"part": 18, "real": "notextracted.mp4"},           # part not trained on here: ignored, no error
+    ]}))
+    args = _args(tmp_path, crops, "--name", "h2", "--epochs", "1")
+    args[args.index("--holdout") + 1] = str(h)
+    train_script.main(args)
+    cfg = json.loads((tmp_path / "runs" / "h2" / "config.json").read_text())
+    assert cfg["holdout_excluded"] == ["00/p0r2.mp4", "01/p1r5.mp4"]
+    assert cfg["train_reals"] == 14 and cfg["train_fakes"] == 28   # 16 reals, 32 fakes minus 2 whole groups
+
+
+def test_holdout_group_missing_from_trained_part_is_an_error(tmp_path, crops):
+    h = tmp_path / "hold.json"
+    h.write_text(json.dumps({"groups": [{"part": 1, "real": "typo.mp4"}]}))
+    args = _args(tmp_path, crops, "--name", "h3", "--epochs", "1")
+    args[args.index("--holdout") + 1] = str(h)
+    with pytest.raises(SystemExit, match="hold-out group"):
+        train_script.main(args)
+
+
 def test_parts_dev_and_every_config_loads():
     cfg = train_script.resolve_config(train_script.parse_args(["--parts", "dev"]))
     assert cfg["parts"] == [0, 1, 2, 3, 4, 5]
-    for y in sorted((ROOT / "configs").glob("*.yaml")):
+    for y in sorted(y for y in (ROOT / "configs").glob("*.yaml") if not y.name.startswith("queue_")):
         cfg = train_script.resolve_config(train_script.parse_args(["--config", str(y)]))
         assert cfg["epochs"] > 0, y.name
         if cfg["parts"] is not None:
@@ -167,6 +191,28 @@ def test_robust_preset_steps_keep_shape_and_dtype():
     assert torch.equal(CropZoom(p=0.0)(img), img) and torch.equal(DownUp(p=0.0)(img), img)
     flat = torch.full((3, 224, 224), 100, dtype=torch.uint8)
     assert torch.equal(CropZoom(p=1.0, zoom=(1.3, 1.3), shift=0.0)(flat), flat)  # zoom of a flat image is flat
+
+
+def test_robust_half_halves_only_the_four_new_steps():
+    from unmask.data.augment import CropZoom, DownUp, GaussNoise, GridDropout, build_augment
+
+    def probs(preset):
+        steps = build_augment(preset).transforms
+        p = {type(s).__name__: s.p for s in steps if isinstance(s, (CropZoom, DownUp, GaussNoise, GridDropout))}
+        p["second_jpeg"] = [s.p for s in steps if type(s).__name__ == "RandomApply"
+                            and type(s.transforms[0]).__name__ == "JPEG"][0]
+        p["n_steps"] = len(steps)
+        return p
+
+    full, half = probs("robust"), probs("robust_half")
+    assert full == {"CropZoom": 0.5, "DownUp": 0.3, "GaussNoise": 0.2, "GridDropout": 0.3,
+                    "second_jpeg": 0.2, "n_steps": 10}
+    assert half == {"CropZoom": 0.25, "DownUp": 0.15, "GaussNoise": 0.1, "GridDropout": 0.3,
+                    "second_jpeg": 0.1, "n_steps": 10}
+    img = torch.randint(0, 256, (3, 224, 224), dtype=torch.uint8)
+    assert build_augment("robust_half")(img).shape == img.shape
+    cfg = train_script.resolve_config(train_script.parse_args(["--aug", "robust_half"]))
+    assert cfg["aug"] == "robust_half"
 
 
 def test_views_are_deterministic_and_change_the_image():
@@ -247,6 +293,114 @@ def test_show_aug_writes_a_grid_per_preset(tmp_path, crops):
     sa = iu.module_from_spec(iu.spec_from_file_location("show_aug", ROOT / "scripts" / "show_aug.py"))
     sa.__spec__.loader.exec_module(sa)
     paths = sa.main(["--crops-dir", str(crops), "--out-dir", str(tmp_path)])
-    assert [p.name for p in paths] == ["aug_none.jpg", "aug_light.jpg", "aug_strong.jpg", "aug_robust.jpg"]
+    assert [p.name for p in paths] == ["aug_none.jpg", "aug_light.jpg", "aug_strong.jpg", "aug_robust.jpg",
+                                       "aug_robust_half.jpg"]
     img = cv2.imread(str(paths[-1]))
     assert img.shape[:2] == (4 * 32, 4 * 32)   # 4 x 4 tiles of the 32 px synthetic crops
+
+
+# ---------------------------------------------------------------- freeze and the night queue (PLAN 10.3)
+def test_freeze_in_the_past_stops_after_the_first_epoch_and_keeps_best(tmp_path, crops):
+    train_script.main(_args(tmp_path, crops, "--name", "fz", "--epochs", "3", "--freeze", "2000-01-01 00:00"))
+    run = tmp_path / "runs" / "fz"
+    assert (run / "best.pt").exists()
+    rows = list(csv.DictReader(open(run / "metrics.csv", encoding="utf-8")))
+    assert len(rows) == 1                                      # stopped after epoch 1 of 3
+    res = list(csv.DictReader(open(tmp_path / "results.csv", encoding="utf-8")))
+    assert res[-1]["name"] == "fz" and res[-1]["epochs_run"] == "1"   # counts as a final model (best.pt)
+
+
+def _queue_module():
+    spec = importlib.util.spec_from_file_location("run_queue", ROOT / "scripts" / "run_queue.py")
+    rq = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(rq)
+    return rq
+
+
+def test_run_queue_order_freeze_resume_and_planned_not_run(tmp_path):
+    from datetime import datetime, timedelta
+    rq = _queue_module()
+    q = tmp_path / "q.yaml"
+    q.write_text(
+        "freeze: \"2026-11-17 05:00\"\n"
+        "runs:\n"
+        "  - {name: big, config: configs/e7_l14.yaml, set: {epochs: 4, lr: 2.0e-4, grad_ckpt: true}}\n"
+        "  - {name: cnn, config: configs/e3_effb4.yaml, set: {epochs: 6}}\n"
+        "  - {name: late, config: configs/e1_linear_probe.yaml}\n", encoding="utf-8")
+    runs = tmp_path / "runs"
+    (runs / "cnn").mkdir(parents=True)
+    (runs / "cnn" / "last.pt").write_bytes(b"x")              # interrupted earlier -> resumed
+    clock = [datetime(2026, 11, 17, 1, 0)]                    # each training run moves the clock 2 h
+    calls = []
+
+    def fake_run(cmd):
+        calls.append(cmd)
+        if cmd[1].endswith("train.py"):
+            name = cmd[cmd.index("--name") + 1]
+            (runs / name).mkdir(parents=True, exist_ok=True)
+            (runs / name / "best.pt").write_bytes(b"x")
+            clock[0] += timedelta(hours=2, minutes=1)        # 01:00 -> 03:01 -> 05:02 (past the freeze)
+        return 0
+
+    report = dict(rq.main([str(q), "--runs-dir", str(runs), "--results", str(tmp_path / "res.csv")],
+                          now=lambda: clock[0], disk=lambda: 30.0, run_cmd=fake_run))
+    scripts = [(Path(c[1]).name, c[c.index("--name") + 1] if "--name" in c else c[c.index("--run") + 1])
+               for c in calls]
+    assert scripts == [("train.py", "big"), ("eval_val.py", "big"), ("average_ckpt.py", "big"),
+                       ("train.py", "cnn"), ("eval_val.py", "cnn")]          # no averaging for EfficientNet
+    big = calls[0]
+    assert big[big.index("--epochs") + 1] == "4" and big[big.index("--lr") + 1] == "0.0002"
+    assert "--grad-ckpt" in big and big[big.index("--freeze") + 1] == "2026-11-17 05:00"
+    assert "--resume" in calls[3] and "--config" not in calls[3]
+    assert report["late"].startswith("planned, not run")
+
+
+def test_run_queue_does_not_start_below_the_disk_floor(tmp_path):
+    rq = _queue_module()
+    q = tmp_path / "q.yaml"
+    q.write_text("freeze: \"2099-01-01 05:00\"\nruns:\n  - {name: a, config: configs/e2_b16_ln.yaml}\n",
+                 encoding="utf-8")
+    calls = []
+    report = dict(rq.main([str(q), "--runs-dir", str(tmp_path / "runs"), "--results", str(tmp_path / "r.csv")],
+                          disk=lambda: 12.0, run_cmd=lambda c: calls.append(c) or 0, sleep=lambda s: None))
+    assert not calls and "free disk 12.0 GB" in report["a"]
+
+
+def test_queue_finals_file_loads():
+    rq = _queue_module()
+    freeze, runs = rq.load_queue(ROOT / "configs" / "queue_finals.yaml")
+    assert [r["name"] for r in runs[:4]] == ["e2_b16", "e7_l14", "e1_linear_probe", "e3_effb4"]
+    assert freeze.hour == 5
+    for r in runs:
+        cfg = train_script.resolve_config(train_script.parse_args(
+            ["--config", str(ROOT / r["config"])] + rq.flags(r.get("set"))))
+        assert cfg["epochs"] > 0 and cfg["loss"] == "ce", r["name"]
+
+
+def test_run_queue_continues_after_a_failed_or_crashing_job(tmp_path):
+    rq = _queue_module()
+    q = tmp_path / "q.yaml"
+    q.write_text('freeze: "2099-01-01 05:00"\nruns:\n'
+                 "  - {name: bad, config: configs/e2_b16_ln.yaml}\n"
+                 "  - {name: boom, config: configs/e2_b16_ln.yaml}\n"
+                 "  - {name: good, config: configs/e2_b16_ln.yaml}\n", encoding="utf-8")
+    runs, calls = tmp_path / "runs", []
+
+    def fake_run(cmd):
+        calls.append(cmd)
+        name = cmd[cmd.index("--name") + 1] if "--name" in cmd else cmd[cmd.index("--run") + 1]
+        if name == "bad":
+            return 1                                       # training exits with an error
+        if name == "boom":
+            raise OSError("launcher crashed")
+        if cmd[1].endswith("train.py"):
+            (runs / name).mkdir(parents=True, exist_ok=True)
+            (runs / name / "best.pt").write_bytes(b"x")
+        return 2 if cmd[1].endswith("eval_val.py") else 0  # a failed check is logged, not fatal
+
+    report = dict(rq.main([str(q), "--runs-dir", str(runs), "--results", str(tmp_path / "r.csv")],
+                          disk=lambda: 30.0, run_cmd=fake_run))
+    assert report["bad"].startswith("FAILED") and "exit 1" in report["bad"]
+    assert report["boom"].startswith("FAILED") and "OSError" in report["boom"]
+    assert "check FAILED: eval_val exit 2" in report["good"]
+    assert [Path(c[1]).name for c in calls][-3:] == ["train.py", "eval_val.py", "average_ckpt.py"]

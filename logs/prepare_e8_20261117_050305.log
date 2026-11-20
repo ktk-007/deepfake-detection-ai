@@ -1,0 +1,4 @@
+2026-11-17 05:03:05  free disk 32.7 GB; downloading yermandy/GenD_CLIP_L_14 model.safetensors (about 1.2 GB)
+2026-11-17 05:03:33  GenD checkpoint: 394 tensors
+2026-11-17 05:03:38  frozen backbone matches OpenAI CLIP ViT-L/14 (checked patch embedding, class token, attention and MLP)
+2026-11-17 05:03:38  saved C:\Projects\Deepfake detection\runs\e8_gend\best.pt (102 tensors: LayerNorms + LinearNorm head) | log C:\Projects\Deepfake detection\logs\prepare_e8_20261117_050305.log

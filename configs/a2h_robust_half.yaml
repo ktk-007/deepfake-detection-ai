@@ -1,0 +1,11 @@
+# A2h (E4a, PLAN 16 risk rule): A2r lost 3.0 points on the clean view (> 2), so the four new robust steps run at
+# half their probability (CropZoom 0.25, DownUp 0.15, noise 0.1, second JPEG 0.1). CE only, lr 3e-4.
+# Stage A: parts 00-05, 8 epochs, no early stop (PLAN 10.1). Report both A2r and A2h.
+arch: vit_b16
+aug: robust_half
+loss: ce
+lr: 3.0e-4
+seed: 0
+parts: dev
+epochs: 8
+patience: 0

@@ -1,0 +1,12 @@
+2026-11-16 23:05:54  a3r_strong: averaged epochs [5, 6, 7] -> C:\Projects\Deepfake detection\runs\a3r_strong\avg.pt
+2026-11-16 23:08:31  a3r_strong avg clean    : video AUC 0.8902, AP 0.9642, EER 0.2106 (277 real / 859 fake videos, 51 s)
+2026-11-16 23:08:31  a3r_strong avg tight    : video AUC 0.8613, AP 0.9497, EER 0.2568 (277 real / 859 fake videos, 51 s)
+2026-11-16 23:08:31  a3r_strong avg degraded : video AUC 0.8116, AP 0.9364, EER 0.2675 (277 real / 859 fake videos, 51 s)
+2026-11-16 23:08:31  a3r_strong avg val_robust (mean of the three AUCs): 0.8544
+2026-11-16 23:08:31  
+2026-11-16 23:08:31  ==== AVERAGE_CKPT SUMMARY ====
+2026-11-16 23:08:31  run a3r_strong: epochs [5, 6, 7] averaged | val_robust best.pt 0.8550, avg.pt 0.8544 (gain -0.07 points, needs 0.3)
+2026-11-16 23:08:31  decision: use best.pt | results.csv row updated
+2026-11-16 23:08:31  time 2.6 min | free disk 35.3 GB | log C:\Projects\Deepfake detection\logs\average_ckpt_a3r_strong_20261116_230554.log
+2026-11-16 23:08:31  NEXT: paste this summary back.
+2026-11-16 23:08:31  ==============================

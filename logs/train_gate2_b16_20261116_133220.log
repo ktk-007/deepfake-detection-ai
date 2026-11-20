@@ -1,0 +1,19 @@
+2026-11-16 13:32:20  resuming gate2_b16 after epoch 1 (settings come from the checkpoint)
+2026-11-16 13:32:20  train parts [0, 1, 2]: 424 real videos, 1478 usable fakes | val part 08: 277 real / 859 fake videos, 9088 frames (8 per video)
+2026-11-16 13:32:20  model vit_b16 (first use downloads weights)
+2026-11-16 13:32:23  parameters: total 85,800,962, trainable 41,474 (0.048%) | QuickGELU active
+2026-11-16 13:32:23  batch 64 (8 pairs x 4 frames x 2), 53 steps/epoch, lr 0.0003 (warm-up 53 steps, cosine to 1e-06), wd 0, loss gend, aug light, paired, seed 0, workers 4
+2026-11-16 13:32:23  run folder: C:\Projects\Deepfake detection\runs\gate2_b16 | log: C:\Projects\Deepfake detection\logs\train_gate2_b16_20261116_133220.log
+2026-11-16 13:33:37  epoch 2/2: loss -0.1679 (ce 0.6892, align 1.0934, unif -1.9330) | part 08 video AUC 0.7541, AP 0.9147, EER 0.3467 NEW BEST | 91 img/s, train 37 s, val 37 s | C:\Projects\Deepfake detection\runs\gate2_b16\best.pt
+2026-11-16 13:33:38  
+2026-11-16 13:33:38  ==== TRAINING SUMMARY ====
+2026-11-16 13:33:38  run gate2_b16: vit_b16, parts [0, 1, 2], 424 train reals, aug light, loss gend, lr 0.0003, seed 0
+2026-11-16 13:33:38  epochs done 2/2: finished all epochs
+2026-11-16 13:33:38  best epoch 2: part 08 video AUC 0.7541, AP 0.9147, EER 0.3467, log loss 0.6834 (8 frames per video; DFDC numbers are optimistic: shared actors)
+2026-11-16 13:33:38  AUC by epoch: 0.669 0.754
+2026-11-16 13:33:38  speed 90.8 img/s | peak VRAM 4.28 GB | time 1.3 min
+2026-11-16 13:33:38  checkpoints: C:\Projects\Deepfake detection\runs\gate2_b16\best.pt (best), C:\Projects\Deepfake detection\runs\gate2_b16\last.pt (resume)
+2026-11-16 13:33:38  results row appended to C:\Projects\Deepfake detection\results\results.csv
+2026-11-16 13:33:38  free disk: 8.4 GB
+2026-11-16 13:33:38  NEXT: paste this summary back.
+2026-11-16 13:33:38  ==========================

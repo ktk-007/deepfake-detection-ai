@@ -1,0 +1,20 @@
+2026-11-17 06:01:46  choices locked at 2026-11-17T06:01:31 on part 08; scoring each test set once per model
+2026-11-17 06:01:47  DFDC part 09: 1208 videos (920 fake)
+2026-11-17 06:01:47  Celeb-DF v2: 518 videos (340 fake)
+2026-11-17 06:01:47  WildDeepfake: 806 videos (410 fake)
+2026-11-17 06:01:53  e7_l14: loaded C:\Projects\Deepfake detection\runs\e7_l14\best.pt
+2026-11-17 06:16:44  e2_b16: loaded C:\Projects\Deepfake detection\runs\e2_b16\best.pt
+2026-11-17 06:20:28  e3_effb4: loaded C:\Projects\Deepfake detection\runs\e3_effb4\best.pt
+2026-11-17 06:23:23  e1_linear_probe: loaded C:\Projects\Deepfake detection\runs\e1_linear_probe\best.pt
+2026-11-17 06:27:11  e8_gend: loaded C:\Projects\Deepfake detection\runs\e8_gend\best.pt
+2026-11-17 06:42:08  
+2026-11-17 06:42:08  ==== PHASE 4 TEST SUMMARY ====
+2026-11-17 06:42:08  E7 CLIP ViT-L/14: part 09 0.9827 (0.976-0.988) | Celeb-DF 0.9135 (0.887-0.936) | WildDeepfake 0.9279 (0.883-0.961)
+2026-11-17 06:42:08  E2 CLIP ViT-B/16: part 09 0.9632 (0.951-0.973) | Celeb-DF 0.8210 (0.784-0.854) | WildDeepfake 0.8914 (0.838-0.933)
+2026-11-17 06:42:08  E3 EfficientNet-B4: part 09 0.9474 (0.933-0.961) | Celeb-DF 0.7831 (0.740-0.823) | WildDeepfake 0.8200 (0.752-0.878)
+2026-11-17 06:42:08  E1 linear probe (dev set): part 09 0.6845 (0.660-0.711) | Celeb-DF 0.5919 (0.534-0.644) | WildDeepfake 0.7227 (0.641-0.810)
+2026-11-17 06:42:08  E8 GenD published (FF++): part 09 0.9650 (0.952-0.976) | Celeb-DF 0.9485 (0.931-0.964) | WildDeepfake 0.8897 (0.828-0.934)
+2026-11-17 06:42:08  E10 Ensemble (e7_l14 + e3_effb4): part 09 0.9744 (0.964-0.983) | Celeb-DF 0.8897 (0.861-0.915) | WildDeepfake 0.9207 (0.879-0.954)
+2026-11-17 06:42:08  table: C:\Projects\Deepfake detection\results\final_table.md | plots: C:\Projects\Deepfake detection\results\plots | app numbers from E10 Ensemble (e7_l14 + e3_effb4)
+2026-11-17 06:42:08  time 40.4 min | free disk 20.4 GB | log C:\Projects\Deepfake detection\logs\phase4_test_20261117_060146.log
+2026-11-17 06:42:08  ==============================

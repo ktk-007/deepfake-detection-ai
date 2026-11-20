@@ -1,0 +1,14 @@
+2026-11-16 22:29:18  train parts [0, 1, 2, 3, 4, 5]: 1186 real videos, 3761 usable fakes | val part 08: 277 real / 859 fake videos, 9088 frames (8 per video)
+2026-11-16 22:29:18  model vit_b16 (first use downloads weights)
+2026-11-16 22:29:20  parameters: total 85,800,962, trainable 41,474 (0.048%) | QuickGELU active
+2026-11-16 22:29:20  batch 64 (8 pairs x 4 frames x 2), 148 steps/epoch, lr 0.0003 (warm-up 148 steps, cosine to 1e-06), wd 0, loss ce, aug strong, paired, seed 0, workers 4
+2026-11-16 22:29:20  run folder: C:\Projects\Deepfake detection\runs\a3r_strong | log: C:\Projects\Deepfake detection\logs\train_a3r_strong_20261116_222918.log
+2026-11-16 22:29:20  epoch 1/8: free disk 37.1 GB
+2026-11-16 22:29:28  
+2026-11-16 22:29:28  ==== TRAINING SUMMARY ====
+2026-11-16 22:29:28  run a3r_strong: vit_b16, parts [0, 1, 2, 3, 4, 5], 1186 train reals, aug strong, loss ce, lr 0.0003, seed 0
+2026-11-16 22:29:28  epochs done 0/8: interrupted (Ctrl+C); last.pt holds the last finished epoch
+2026-11-16 22:29:28  checkpoints: C:\Projects\Deepfake detection\runs\a3r_strong\best.pt (best), C:\Projects\Deepfake detection\runs\a3r_strong\last.pt (resume)
+2026-11-16 22:29:28  free disk: 25.5 GB
+2026-11-16 22:29:28  NEXT: to continue: python scripts\train.py --name a3r_strong --resume
+2026-11-16 22:29:28  ==========================

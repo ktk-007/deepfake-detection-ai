@@ -1,0 +1,42 @@
+2026-11-17 00:03:48  app-test hold-out: excluded group(s) ['06/yirkaxfwgb.mp4', '18/enyfzkpdeq.mp4'] (real + all its fakes) from training
+2026-11-17 00:03:49  train parts [0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]: 5810 real videos, 18875 usable fakes | val part 08: 277 real / 859 fake videos, 9088 frames (8 per video)
+2026-11-17 00:03:49  model vit_b16 (first use downloads weights)
+2026-11-17 00:03:52  parameters: total 85,800,962, trainable 41,474 (0.048%) | QuickGELU active
+2026-11-17 00:03:52  batch 64 (8 pairs x 4 frames x 2), 726 steps/epoch, lr 0.0003 (warm-up 726 steps, cosine to 1e-06), wd 0, loss ce, aug light, paired, seed 0, workers 4
+2026-11-17 00:03:52  run folder: C:\Projects\Deepfake detection\runs\e2_b16 | log: C:\Projects\Deepfake detection\logs\train_e2_b16_20261117_000348.log
+2026-11-17 00:03:52  epoch 1/12: free disk 35.6 GB
+2026-11-17 00:09:35  epoch 1/12: loss 0.6212 (ce 0.6212, align 0.0000, unif 0.0000) | part 08 video AUC 0.9362, AP 0.9805, EER 0.1337 NEW BEST | 146 img/s, train 318 s, val 25 s | C:\Projects\Deepfake detection\runs\e2_b16\best.pt
+2026-11-17 00:09:35  epoch 2/12: free disk 9.2 GB
+2026-11-17 00:15:13  epoch 2/12: loss 0.4603 (ce 0.4603, align 0.0000, unif 0.0000) | part 08 video AUC 0.9636, AP 0.9891, EER 0.0864 NEW BEST | 149 img/s, train 312 s, val 26 s | C:\Projects\Deepfake detection\runs\e2_b16\best.pt
+2026-11-17 00:15:13  epoch 3/12: free disk 9.2 GB
+2026-11-17 00:20:49  epoch 3/12: loss 0.4121 (ce 0.4121, align 0.0000, unif 0.0000) | part 08 video AUC 0.9731, AP 0.9921, EER 0.0698 NEW BEST | 150 img/s, train 311 s, val 25 s | C:\Projects\Deepfake detection\runs\e2_b16\best.pt
+2026-11-17 00:20:49  epoch 4/12: free disk 9.2 GB
+2026-11-17 00:26:25  epoch 4/12: loss 0.3932 (ce 0.3932, align 0.0000, unif 0.0000) | part 08 video AUC 0.9720, AP 0.9916, EER 0.0799 | 149 img/s, train 311 s, val 25 s | C:\Projects\Deepfake detection\runs\e2_b16\last.pt
+2026-11-17 00:26:25  epoch 5/12: free disk 9.2 GB
+2026-11-17 00:32:01  epoch 5/12: loss 0.3661 (ce 0.3661, align 0.0000, unif 0.0000) | part 08 video AUC 0.9784, AP 0.9935, EER 0.0692 NEW BEST | 149 img/s, train 311 s, val 25 s | C:\Projects\Deepfake detection\runs\e2_b16\best.pt
+2026-11-17 00:32:01  epoch 6/12: free disk 9.2 GB
+2026-11-17 00:37:37  epoch 6/12: loss 0.3560 (ce 0.3560, align 0.0000, unif 0.0000) | part 08 video AUC 0.9785, AP 0.9935, EER 0.0692 NEW BEST | 149 img/s, train 311 s, val 25 s | C:\Projects\Deepfake detection\runs\e2_b16\best.pt
+2026-11-17 00:37:37  epoch 7/12: free disk 9.3 GB
+2026-11-17 00:43:13  epoch 7/12: loss 0.3407 (ce 0.3407, align 0.0000, unif 0.0000) | part 08 video AUC 0.9768, AP 0.9929, EER 0.0788 | 150 img/s, train 311 s, val 25 s | C:\Projects\Deepfake detection\runs\e2_b16\last.pt
+2026-11-17 00:43:13  epoch 8/12: free disk 9.3 GB
+2026-11-17 00:48:50  epoch 8/12: loss 0.3400 (ce 0.3400, align 0.0000, unif 0.0000) | part 08 video AUC 0.9799, AP 0.9938, EER 0.0686 NEW BEST | 149 img/s, train 311 s, val 26 s | C:\Projects\Deepfake detection\runs\e2_b16\best.pt
+2026-11-17 00:48:50  epoch 9/12: free disk 9.3 GB
+2026-11-17 00:54:26  epoch 9/12: loss 0.3338 (ce 0.3338, align 0.0000, unif 0.0000) | part 08 video AUC 0.9818, AP 0.9945, EER 0.0663 NEW BEST | 149 img/s, train 311 s, val 25 s | C:\Projects\Deepfake detection\runs\e2_b16\best.pt
+2026-11-17 00:54:26  epoch 10/12: free disk 9.3 GB
+2026-11-17 01:00:01  epoch 10/12: loss 0.3285 (ce 0.3285, align 0.0000, unif 0.0000) | part 08 video AUC 0.9815, AP 0.9943, EER 0.0639 | 150 img/s, train 311 s, val 25 s | C:\Projects\Deepfake detection\runs\e2_b16\last.pt
+2026-11-17 01:00:01  epoch 11/12: free disk 9.3 GB
+2026-11-17 01:05:38  epoch 11/12: loss 0.3286 (ce 0.3286, align 0.0000, unif 0.0000) | part 08 video AUC 0.9818, AP 0.9945, EER 0.0699 NEW BEST | 149 img/s, train 311 s, val 25 s | C:\Projects\Deepfake detection\runs\e2_b16\best.pt
+2026-11-17 01:05:38  epoch 12/12: free disk 9.3 GB
+2026-11-17 01:11:14  epoch 12/12: loss 0.3307 (ce 0.3307, align 0.0000, unif 0.0000) | part 08 video AUC 0.9817, AP 0.9944, EER 0.0699 | 150 img/s, train 311 s, val 25 s | C:\Projects\Deepfake detection\runs\e2_b16\last.pt
+2026-11-17 01:11:17  
+2026-11-17 01:11:17  ==== TRAINING SUMMARY ====
+2026-11-17 01:11:17  run e2_b16: vit_b16, parts [0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 5810 train reals, aug light, loss ce, lr 0.0003, seed 0
+2026-11-17 01:11:17  epochs done 12/12: finished all epochs
+2026-11-17 01:11:17  best epoch 11: part 08 video AUC 0.9818, AP 0.9945, EER 0.0699, log loss 0.2184 (8 frames per video; DFDC numbers are optimistic: shared actors)
+2026-11-17 01:11:17  AUC by epoch: 0.936 0.964 0.973 0.972 0.978 0.979 0.977 0.980 0.982 0.981 0.982 0.982
+2026-11-17 01:11:17  speed 149.1 img/s | peak VRAM 4.28 GB | time 67.5 min
+2026-11-17 01:11:17  checkpoints: C:\Projects\Deepfake detection\runs\e2_b16\best.pt (best), C:\Projects\Deepfake detection\runs\e2_b16\last.pt (resume)
+2026-11-17 01:11:17  results row appended to C:\Projects\Deepfake detection\results\results.csv
+2026-11-17 01:11:17  free disk: 9.1 GB
+2026-11-17 01:11:17  NEXT: paste this summary back.
+2026-11-17 01:11:17  ==========================

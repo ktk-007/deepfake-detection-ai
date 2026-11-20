@@ -1,0 +1,21 @@
+2026-11-17 06:00:26  part 08: 1136 videos (859 fake), validation only; no test set is loaded
+2026-11-17 06:00:26  e7_l14: val_robust 0.9805 without flip, 0.9810 with flip -> flip not adopted
+2026-11-17 06:00:26  e7_l14: T 0.63, band 0.249-0.249, val_robust 0.9805
+2026-11-17 06:00:26  e2_b16: val_robust 0.9690 without flip, 0.9680 with flip -> flip not adopted
+2026-11-17 06:00:26  e2_b16: T 0.69, band 0.268-0.366, val_robust 0.9690
+2026-11-17 06:00:26  e3_effb4: val_robust 0.9753 without flip, 0.9772 with flip -> flip not adopted
+2026-11-17 06:00:26  e3_effb4: T 0.71, band 0.635-0.797, val_robust 0.9753
+2026-11-17 06:00:27  e1_linear_probe: T 0.25, band 0.442-0.544, val_robust 0.7035
+2026-11-17 06:00:27  e8_gend: T 0.79, band 0.224-0.704, val_robust 0.8901
+2026-11-17 06:00:27  ensemble: adopted e7_l14 + e3_effb4 (val_robust 0.9862)
+2026-11-17 06:00:27  
+2026-11-17 06:00:27  ==== PHASE 4 VALIDATION SUMMARY ====
+2026-11-17 06:00:27  e7_l14: val_robust 0.9805 (clean 0.9894, tight 0.9894, degraded 0.9601) | flip False | T 0.63 | band 0.249-0.249
+2026-11-17 06:00:27  e2_b16: val_robust 0.9690 (clean 0.9823, tight 0.9661, degraded 0.9564) | flip False | T 0.69 | band 0.268-0.366
+2026-11-17 06:00:27  e3_effb4: val_robust 0.9753 (clean 0.9819, tight 0.9860, degraded 0.9543) | flip False | T 0.71 | band 0.635-0.797
+2026-11-17 06:00:27  e1_linear_probe: val_robust 0.7035 (clean 0.7089, tight 0.6970, degraded 0.7045) | flip False | T 0.25 | band 0.442-0.544
+2026-11-17 06:00:27  e8_gend: val_robust 0.8901 (clean 0.9181, tight 0.9319, degraded 0.8173) | flip False | T 0.79 | band 0.224-0.704
+2026-11-17 06:00:27  ensemble: e7_l14+e3_effb4 val_robust 0.9862
+2026-11-17 06:00:27  locked: C:\Projects\Deepfake detection\results\phase4\choices.json | time 0.0 min | free disk 31.5 GB | log C:\Projects\Deepfake detection\logs\phase4_val_20261117_060026.log
+2026-11-17 06:00:27  NEXT: python scripts\phase4_test.py  (each test set once)
+2026-11-17 06:00:27  ====================================

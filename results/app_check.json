@@ -1,0 +1,279 @@
+{
+ "model": "CLIP ViT-L/14",
+ "model_key": "vit_l14",
+ "videos": [
+  {
+   "name": "enyfzkpdeq",
+   "source": "DFDC 18",
+   "truth": "real",
+   "label": "real",
+   "verdict": "Likely Real",
+   "confidence": "Medium",
+   "score": 0.181,
+   "seconds": 5.06,
+   "calibrated": true,
+   "correct": true
+  },
+  {
+   "name": "eyfqtmmjhg",
+   "source": "DFDC 18",
+   "truth": "fake",
+   "label": "fake",
+   "verdict": "Likely Fake",
+   "confidence": "High",
+   "score": 0.9928,
+   "seconds": 4.74,
+   "calibrated": true,
+   "correct": true
+  },
+  {
+   "name": "lbqrludiqd",
+   "source": "DFDC 18",
+   "truth": "fake",
+   "label": "fake",
+   "verdict": "Likely Fake",
+   "confidence": "High",
+   "score": 0.9854,
+   "seconds": 4.53,
+   "calibrated": true,
+   "correct": true
+  },
+  {
+   "name": "yirkaxfwgb",
+   "source": "DFDC 06",
+   "truth": "real",
+   "label": "real",
+   "verdict": "Likely Real",
+   "confidence": "Medium",
+   "score": 0.169,
+   "seconds": 4.52,
+   "calibrated": true,
+   "correct": true
+  },
+  {
+   "name": "lwasdlhiiv",
+   "source": "DFDC 06",
+   "truth": "fake",
+   "label": "fake",
+   "verdict": "Likely Fake",
+   "confidence": "High",
+   "score": 0.8834,
+   "seconds": 4.48,
+   "calibrated": true,
+   "correct": true
+  },
+  {
+   "name": "id45_0003",
+   "source": "Celeb-DF",
+   "truth": "real",
+   "label": "real",
+   "verdict": "Likely Real",
+   "confidence": "High",
+   "score": 0.0513,
+   "seconds": 4.56,
+   "calibrated": true,
+   "correct": true
+  },
+  {
+   "name": "id48_id41_0001",
+   "source": "Celeb-DF",
+   "truth": "fake",
+   "label": "inconclusive",
+   "verdict": "Inconclusive",
+   "confidence": null,
+   "score": 0.2713,
+   "seconds": 6.03,
+   "calibrated": true,
+   "correct": false
+  }
+ ],
+ "all_under_20s": true,
+ "correct": 6,
+ "device": "cuda",
+ "checks": [
+  {
+   "model": "CLIP ViT-L/14",
+   "model_key": "vit_l14",
+   "videos": [
+    {
+     "name": "enyfzkpdeq",
+     "source": "DFDC 18",
+     "truth": "real",
+     "label": "real",
+     "verdict": "Likely Real",
+     "confidence": "Medium",
+     "score": 0.181,
+     "seconds": 5.06,
+     "calibrated": true,
+     "correct": true
+    },
+    {
+     "name": "eyfqtmmjhg",
+     "source": "DFDC 18",
+     "truth": "fake",
+     "label": "fake",
+     "verdict": "Likely Fake",
+     "confidence": "High",
+     "score": 0.9928,
+     "seconds": 4.74,
+     "calibrated": true,
+     "correct": true
+    },
+    {
+     "name": "lbqrludiqd",
+     "source": "DFDC 18",
+     "truth": "fake",
+     "label": "fake",
+     "verdict": "Likely Fake",
+     "confidence": "High",
+     "score": 0.9854,
+     "seconds": 4.53,
+     "calibrated": true,
+     "correct": true
+    },
+    {
+     "name": "yirkaxfwgb",
+     "source": "DFDC 06",
+     "truth": "real",
+     "label": "real",
+     "verdict": "Likely Real",
+     "confidence": "Medium",
+     "score": 0.169,
+     "seconds": 4.52,
+     "calibrated": true,
+     "correct": true
+    },
+    {
+     "name": "lwasdlhiiv",
+     "source": "DFDC 06",
+     "truth": "fake",
+     "label": "fake",
+     "verdict": "Likely Fake",
+     "confidence": "High",
+     "score": 0.8834,
+     "seconds": 4.48,
+     "calibrated": true,
+     "correct": true
+    },
+    {
+     "name": "id45_0003",
+     "source": "Celeb-DF",
+     "truth": "real",
+     "label": "real",
+     "verdict": "Likely Real",
+     "confidence": "High",
+     "score": 0.0513,
+     "seconds": 4.56,
+     "calibrated": true,
+     "correct": true
+    },
+    {
+     "name": "id48_id41_0001",
+     "source": "Celeb-DF",
+     "truth": "fake",
+     "label": "inconclusive",
+     "verdict": "Inconclusive",
+     "confidence": null,
+     "score": 0.2713,
+     "seconds": 6.03,
+     "calibrated": true,
+     "correct": false
+    }
+   ],
+   "all_under_20s": true,
+   "correct": 6
+  },
+  {
+   "model": "Ensemble (ViT-L/14 + EfficientNet)",
+   "model_key": "ensemble",
+   "videos": [
+    {
+     "name": "enyfzkpdeq",
+     "source": "DFDC 18",
+     "truth": "real",
+     "label": "real",
+     "verdict": "Likely Real",
+     "confidence": "High",
+     "score": 0.1031,
+     "seconds": 5.1,
+     "calibrated": true,
+     "correct": true
+    },
+    {
+     "name": "eyfqtmmjhg",
+     "source": "DFDC 18",
+     "truth": "fake",
+     "label": "fake",
+     "verdict": "Likely Fake",
+     "confidence": "High",
+     "score": 0.9962,
+     "seconds": 4.71,
+     "calibrated": true,
+     "correct": true
+    },
+    {
+     "name": "lbqrludiqd",
+     "source": "DFDC 18",
+     "truth": "fake",
+     "label": "fake",
+     "verdict": "Likely Fake",
+     "confidence": "High",
+     "score": 0.9905,
+     "seconds": 4.76,
+     "calibrated": true,
+     "correct": true
+    },
+    {
+     "name": "yirkaxfwgb",
+     "source": "DFDC 06",
+     "truth": "real",
+     "label": "real",
+     "verdict": "Likely Real",
+     "confidence": "High",
+     "score": 0.1095,
+     "seconds": 4.79,
+     "calibrated": true,
+     "correct": true
+    },
+    {
+     "name": "lwasdlhiiv",
+     "source": "DFDC 06",
+     "truth": "fake",
+     "label": "fake",
+     "verdict": "Likely Fake",
+     "confidence": "High",
+     "score": 0.8056,
+     "seconds": 4.66,
+     "calibrated": true,
+     "correct": true
+    },
+    {
+     "name": "id45_0003",
+     "source": "Celeb-DF",
+     "truth": "real",
+     "label": "real",
+     "verdict": "Likely Real",
+     "confidence": "High",
+     "score": 0.0275,
+     "seconds": 4.64,
+     "calibrated": true,
+     "correct": true
+    },
+    {
+     "name": "id48_id41_0001",
+     "source": "Celeb-DF",
+     "truth": "fake",
+     "label": "real",
+     "verdict": "Likely Real",
+     "confidence": "Medium",
+     "score": 0.2591,
+     "seconds": 5.22,
+     "calibrated": true,
+     "correct": false
+    }
+   ],
+   "all_under_20s": true,
+   "correct": 6
+  }
+ ]
+}

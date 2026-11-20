@@ -1,0 +1,12 @@
+2026-11-17 01:14:05  e2_b16: averaged epochs [9, 11, 12] -> C:\Projects\Deepfake detection\runs\e2_b16\avg.pt
+2026-11-17 01:16:41  e2_b16 avg clean    : video AUC 0.9826, AP 0.9946, EER 0.0686 (277 real / 859 fake videos, 51 s)
+2026-11-17 01:16:41  e2_b16 avg tight    : video AUC 0.9675, AP 0.9894, EER 0.1018 (277 real / 859 fake videos, 51 s)
+2026-11-17 01:16:41  e2_b16 avg degraded : video AUC 0.9576, AP 0.9871, EER 0.1012 (277 real / 859 fake videos, 51 s)
+2026-11-17 01:16:41  e2_b16 avg val_robust (mean of the three AUCs): 0.9692
+2026-11-17 01:16:41  
+2026-11-17 01:16:41  ==== AVERAGE_CKPT SUMMARY ====
+2026-11-17 01:16:41  run e2_b16: epochs [9, 11, 12] averaged | val_robust best.pt 0.9690, avg.pt 0.9692 (gain +0.03 points, needs 0.3)
+2026-11-17 01:16:41  decision: use best.pt | results.csv row updated
+2026-11-17 01:16:41  time 2.6 min | free disk 33.3 GB | log C:\Projects\Deepfake detection\logs\average_ckpt_e2_b16_20261117_011405.log
+2026-11-17 01:16:41  NEXT: paste this summary back.
+2026-11-17 01:16:41  ==============================

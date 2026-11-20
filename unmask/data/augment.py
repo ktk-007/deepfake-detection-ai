@@ -99,6 +99,9 @@ class GaussNoise(torch.nn.Module):
         return noisy.round_().clamp_(0, 255).to(torch.uint8)
 
 
+PRESETS = ("none", "light", "strong", "robust", "robust_half")
+
+
 def build_augment(preset: str = "light"):
     if preset == "none":
         return None
@@ -115,18 +118,20 @@ def build_augment(preset: str = "light"):
             T.JPEG((30, 100)),
             GridDropout(p=0.5),
         ])
-    if preset == "robust":
+    if preset in ("robust", "robust_half"):
         # PLAN 9.3 order: flip, affine, crop-zoom, colour, blur, downscale, noise, JPEG, second JPEG, dropout.
+        # robust_half (PLAN 16 risk rule, A2h): the four new steps at half their probability.
+        h = 0.5 if preset == "robust_half" else 1.0
         return T.Compose([
             T.RandomHorizontalFlip(0.5),
             T.RandomAffine(degrees=10, translate=(0.1, 0.1), scale=(0.9, 1.1)),
-            CropZoom(p=0.5, zoom=(1.0, 1.35), shift=0.04),
+            CropZoom(p=0.5 * h, zoom=(1.0, 1.35), shift=0.04),
             T.ColorJitter(brightness=0.3, contrast=0.3, saturation=0.3, hue=0.05),
             T.RandomApply([T.GaussianBlur(kernel_size=7, sigma=(0.1, 2.0))], p=0.1),
-            DownUp(p=0.3, scale=(0.4, 1.0)),
-            GaussNoise(p=0.2, sigma=(2.0, 8.0)),
+            DownUp(p=0.3 * h, scale=(0.4, 1.0)),
+            GaussNoise(p=0.2 * h, sigma=(2.0, 8.0)),
             T.JPEG((30, 100)),
-            T.RandomApply([T.JPEG((50, 90))], p=0.2),
+            T.RandomApply([T.JPEG((50, 90))], p=0.2 * h),
             GridDropout(p=0.3),
         ])
     raise ValueError(f"unknown augmentation preset {preset!r}")

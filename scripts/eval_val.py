@@ -88,7 +88,8 @@ def main(argv=None):
                    args.device, log)
     log.info("")
     log.info("==== EVAL_VAL SUMMARY ====")
-    log.info(f"run {args.run}, checkpoint {res['ckpt']} (epoch {res.get('epoch')}): "
+    ep = res.get("epoch")                       # stored 0-based in the checkpoint; printed 1-based like train.py
+    log.info(f"run {args.run}, checkpoint {res['ckpt']} (epoch {ep + 1 if isinstance(ep, int) else ep}): "
              + ", ".join(f"{v} {res[v]['auc']:.4f}" for v in VIEWS) + f" | val_robust {res['val_robust']:.4f}")
     log.info(f"time {(time.time() - t0) / 60:.1f} min | free disk {free_gb(PROJECT_ROOT):.1f} GB | log {log_path}")
     log.info("NEXT: paste this summary back.")

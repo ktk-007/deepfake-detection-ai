@@ -29,7 +29,7 @@ from torch.utils.data import DataLoader  # noqa: E402
 from tqdm import tqdm  # noqa: E402
 
 from unmask.common import CROPS_DIR, PROJECT_ROOT, RUNS_DIR, setup_logger  # noqa: E402
-from unmask.data.augment import build_augment  # noqa: E402
+from unmask.data.augment import PRESETS, build_augment  # noqa: E402
 from unmask.data.batch import (DEV_PARTS, VAL_PART, check_split_parts, done_parts, free_gb,  # noqa: E402
                                train_parts)
 from unmask.data.dataset import ItemDataset, PairedBatchSampler, collate, load_groups  # noqa: E402
@@ -52,11 +52,29 @@ def disk_free_gb() -> float:
 
 
 def holdout_keys(path: Path) -> set[str]:
-    """Group keys (part/real video) kept out of training so the app can be checked on unseen videos."""
+    """Group keys (part/real video) kept out of training so the app can be checked on unseen videos.
+
+    The file holds {"groups": [{"part": 6, "real": "x.mp4", ...}, ...]}; the older single-group form
+    {"part": 6, "real": "x.mp4", ...} is still read. Each group is the real video and all its fakes."""
     if not path or not Path(path).exists():
         return set()
     d = json.loads(Path(path).read_text(encoding="utf-8"))
-    return {group_key(d["part"], d["real"])}
+    entries = d["groups"] if isinstance(d, dict) and "groups" in d else d if isinstance(d, list) else [d]
+    return {group_key(e["part"], e["real"]) for e in entries}
+
+
+def parse_freeze(text: str | None) -> datetime | None:
+    """'YYYY-MM-DD HH:MM' -> datetime (None when no freeze is set)."""
+    return datetime.strptime(text, "%Y-%m-%d %H:%M") if text else None
+
+
+def drop_holdout(groups: dict, held: set[str], parts: list[int]) -> list[str]:
+    """Remove the held-out groups from the training groups. A held-out group whose part is being trained on
+    but is not found is an error (a typo there would silently leak the demo videos into training)."""
+    missing = sorted(k for k in held if int(k.split("/")[0]) in parts and k not in groups)
+    if missing:
+        raise SystemExit(f"hold-out group(s) not found in the training parts: {missing}; check app_holdout.json")
+    return sorted(k for k in held if groups.pop(k, None) is not None)
 
 BASE = dict(arch="vit_b16", linear_probe=False, parts=None, epochs=20, patience=5, smooth=3,
             frames_per_video=4, warmup_epochs=1, min_lr=1e-6, aug="light", unpaired=False,
@@ -81,7 +99,7 @@ def parse_args(argv=None):
     ap.add_argument("--weight-decay", type=float)
     ap.add_argument("--warmup-epochs", type=float)
     ap.add_argument("--min-lr", type=float)
-    ap.add_argument("--aug", choices=["none", "light", "strong", "robust"])
+    ap.add_argument("--aug", choices=PRESETS)
     ap.add_argument("--loss", choices=["gend", "ce"], help="gend = CE + 0.1 align + 0.5 unif; ce = CE only")
     ap.add_argument("--label-smoothing", type=float)
     ap.add_argument("--unpaired", action="store_true", default=None, help="E4b: fakes from other originals")
@@ -94,6 +112,8 @@ def parse_args(argv=None):
     ap.add_argument("--note")
     ap.add_argument("--resume", action="store_true", help="continue runs\\<name>\\last.pt")
     ap.add_argument("--stop-after", type=int, default=0, help="stop after N epochs in this session (resume test)")
+    ap.add_argument("--freeze", help="freeze time 'YYYY-MM-DD HH:MM' (PLAN 10.3): an epoch ending at or after it "
+                                     "is the last one; best.pt stays the final model")
     ap.add_argument("--bench", type=int, default=0, help="run N training steps, report img/s and peak VRAM, exit")
     ap.add_argument("--max-steps", type=int, default=0, help=argparse.SUPPRESS)  # debug: cap steps per epoch
     ap.add_argument("--crops-dir", type=Path, default=CROPS_DIR, help=argparse.SUPPRESS)
@@ -173,8 +193,7 @@ def main(argv=None):
 
     seed_everything(cfg["seed"])
     groups = load_groups(parts, args.crops_dir, include_flagged=cfg["include_flagged"])
-    held = holdout_keys(args.holdout)
-    dropped = sorted(k for k in held if groups.pop(k, None) is not None)
+    dropped = drop_holdout(groups, holdout_keys(args.holdout), parts)
     if dropped:
         log.info(f"app-test hold-out: excluded group(s) {dropped} (real + all its fakes) from training")
     val_groups = list(load_groups([VAL_PART], args.crops_dir, include_flagged=False).values())
@@ -278,6 +297,7 @@ def main(argv=None):
                                                 val_videos=n_val_videos, steps_per_epoch=steps_per_epoch))
     log.info(f"run folder: {run_dir} | log: {log_path}")
     stop_reason, epochs_this_session, img_s_all = "finished all epochs", 0, []
+    freeze_at = parse_freeze(args.freeze)
     try:
         for epoch in range(start_epoch, cfg["epochs"]):
             sampler.set_epoch(epoch)
@@ -330,6 +350,9 @@ def main(argv=None):
             if args.stop_after and epochs_this_session >= args.stop_after and epoch + 1 < cfg["epochs"]:
                 stop_reason = f"stopped after {epochs_this_session} epoch(s) as asked (--stop-after)"
                 break
+            if freeze_at and datetime.now() >= freeze_at and epoch + 1 < cfg["epochs"]:
+                stop_reason = f"stopped at the freeze ({args.freeze}) after epoch {epoch + 1}; best.pt is final"
+                break
     except KeyboardInterrupt:
         stop_reason = "interrupted (Ctrl+C); last.pt holds the last finished epoch"
     finally:
@@ -337,7 +360,7 @@ def main(argv=None):
 
     # ---------------------------------------------------------------- summary
     done = len(history)
-    complete = stop_reason.startswith(("finished", "early stop"))
+    complete = stop_reason.startswith(("finished", "early stop", "stopped at the freeze"))
     peak = torch.cuda.max_memory_allocated() / 2**30 if device == "cuda" else 0.0
     best = history[stopper.best_epoch] if 0 <= stopper.best_epoch < done else None
     minutes = (time.time() - t_start) / 60

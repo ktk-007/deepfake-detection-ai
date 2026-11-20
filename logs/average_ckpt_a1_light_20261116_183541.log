@@ -1,0 +1,12 @@
+2026-11-16 18:35:41  a1_light: averaged epochs [1, 2, 7] -> C:\Projects\Deepfake detection\runs\a1_light\avg.pt
+2026-11-16 18:38:16  a1_light avg clean    : video AUC 0.7295, AP 0.9102, EER 0.3396 (277 real / 859 fake videos, 51 s)
+2026-11-16 18:38:16  a1_light avg tight    : video AUC 0.7289, AP 0.9068, EER 0.3290 (277 real / 859 fake videos, 51 s)
+2026-11-16 18:38:16  a1_light avg degraded : video AUC 0.6246, AP 0.8630, EER 0.4107 (277 real / 859 fake videos, 51 s)
+2026-11-16 18:38:16  a1_light avg val_robust (mean of the three AUCs): 0.6943
+2026-11-16 18:38:16  
+2026-11-16 18:38:16  ==== AVERAGE_CKPT SUMMARY ====
+2026-11-16 18:38:16  run a1_light: epochs [1, 2, 7] averaged | val_robust best.pt 0.7335, avg.pt 0.6943 (gain -3.92 points, needs 0.3)
+2026-11-16 18:38:16  decision: use best.pt | results.csv row updated
+2026-11-16 18:38:16  time 2.6 min | free disk 40.8 GB | log C:\Projects\Deepfake detection\logs\average_ckpt_a1_light_20261116_183541.log
+2026-11-16 18:38:16  NEXT: paste this summary back.
+2026-11-16 18:38:16  ==============================
